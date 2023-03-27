@@ -8,6 +8,7 @@ from random import randint
 pygame.init()
 pygame.font.init()
 
+
 screen = pygame.display.set_mode((500,200))
 pygame.display.set_caption('your a goober')
 
