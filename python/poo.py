@@ -19,6 +19,11 @@ class Mouse(pygame.sprite.Sprite):
 		self.image = pygame.image.load('mouse.png').convert_alpha()
 		self.rect = self.image.get_rect()
 
+	def update(self):
+		self.rect.center = pygame.mouse.get_pos()
+
+
+
 def button_draw():
 	global button_list
 	
@@ -78,7 +83,8 @@ while done_not:
 	#mouse sprite things
 
 	
-	pygame.mouse.get_pos()
+	
+	mouse_group.update()
 	mouse_group.draw(screen)
 
 	pygame.display.update()
