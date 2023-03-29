@@ -76,7 +76,9 @@ while done_not:
 	
 	#button_draw()
 	#mouse sprite things
-	mouse.pos_x = pygame.mouse.get_pos()
+
+	
+	pygame.mouse.get_pos()
 	mouse_group.draw(screen)
 
 	pygame.display.update()
