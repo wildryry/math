@@ -8,21 +8,31 @@ pygame.init()
 
 pygame.display.init()
 
-ground = pygame.image.load('ground.png')
-sky = pygame.image.load('sky.png')
+ground = pygame.image.load('images/ground.png')
+sky = pygame.image.load('images/sky.png')
 
 button_list = []
 
 class Mouse(pygame.sprite.Sprite):
 	def __init__(self,pos_x,pos_y):
 		super().__init__()
-		self.image = pygame.image.load('mouse.png').convert_alpha()
+		self.image = pygame.image.load('images/mouse.png').convert_alpha()
 		self.rect = self.image.get_rect()
 
 	def update(self):
 		self.rect.center = pygame.mouse.get_pos()
 
-
+class Button(pygame.sprite.Sprite):
+	def __init__(self, time, pos_x, pos_y,):
+		super().__init__()
+		self.image = pygame.image.load('images/boogie_button.png')
+		self.rect = self.image.get_rect()
+		self.time = time
+	
+	def update(self):
+		
+		
+		print(self.time * int(pygame.time.get_ticks))
 
 def button_draw():
 	global button_list
@@ -35,16 +45,21 @@ def button_draw():
 
 
 screen = pygame.display.set_mode((ground.get_width(),400))
-guy = pygame.image.load('mouse.png').convert_alpha()
+guy = pygame.image.load('images/mouse.png').convert_alpha()
 guy_rect = guy.get_rect(topleft = pygame.mouse.get_pos())
 
-mouse = Mouse(300,200)
+#Button
+button = Button(10000,0,0)
+button_group = pygame.sprite.Group()
+button_group.add(button)
 
+#mouse
+mouse = Mouse(300,200)
 mouse_group = pygame.sprite.Group()
 mouse_group.add(mouse)
 
 
-button_surface = pygame.image.load('boogie_button.png').convert_alpha()
+button_surface = pygame.image.load('images/boogie_button.png').convert_alpha()
 button_rect = button_surface.get_rect(center = (300,200))
 
 back_ground_rect = pygame.Surface.get_rect(screen)
@@ -72,7 +87,7 @@ while done_not:
 			button_list.append(button_rect)
 			
 
-	
+	button.update()
 
 	screen.blit(sky,(0,0))
 	screen.blit(ground ,(0,360))
@@ -81,8 +96,6 @@ while done_not:
 	
 	#button_draw()
 	#mouse sprite things
-
-	
 	
 	mouse_group.update()
 	mouse_group.draw(screen)
