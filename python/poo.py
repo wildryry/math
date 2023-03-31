@@ -56,7 +56,7 @@ button_group.add(button)
 #mouse
 mouse = Mouse(300,200)
 mouse_group = pygame.sprite.Group()
-mouse_group.add(mouse)
+
 
 
 button_surface = pygame.image.load('images/boogie_button.png').convert_alpha()
@@ -87,7 +87,7 @@ while done_not:
 			button_list.append(button_rect)
 			
 
-	button.update()
+	button_group.update()
 
 	screen.blit(sky,(0,0))
 	screen.blit(ground ,(0,360))
