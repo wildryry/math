@@ -32,9 +32,7 @@ class Button(pygame.sprite.Sprite):
 		self.time = time
 	
 	def update(self):
-		if button.rect.colliderect(mouse.rect) and pygame.mouse.get_pressed([0]) == True:
-			button_group.remove(button)
-		print(pygame.mouse.get_pressed([0]))
+		gf = 2
 		
 
 		
