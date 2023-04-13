@@ -23,6 +23,8 @@ check_prime2 = False
 num2 = 2
 num1 = int(input('number break down:'))
 check_prime = find_prime(num1)
+list_of_primes = []
+
 if check_prime == True:
     print('thats a prime')
     exit()
@@ -36,28 +38,46 @@ if debug.lower() == "y":
 
 while check_prime == False:
 
-    num3 = num1%num2
-    if num3 != 0:
+    
+    if num1 % num2 != 0:
         
         
         if debug == True:
             print(num2)
     
-    elif num3 == 0:
-        num1 = num1/num2
+    else:
+        
+        num1 /= num2
+        
         if debug == True:
             print(' ',int(num1))
-        check_prime = find_prime(num1)
+        
+        
+        
         print(num2, int(num1))
-        check_prime2 = find_prime(num2)
-        if check_prime2 == False:
-            num2 = 2
+        list_of_primes.append(num2)
+        
+        if find_prime(num1) and find_prime(num2):
             check_prime = True
         
-    num2 = (num2 + 1)
+        
+        
+            
+        num2 = 1
+        
+    num2 += 1
     if debug == True:
             print(num2)
+list_of_primes.append(int(num1))
+print(list_of_primes)
 exit()
+
+
+
+
+
+
+
 
 
 
