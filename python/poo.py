@@ -16,7 +16,7 @@ sky = pygame.image.load('images/sky.png')
 class Mouse(pygame.sprite.Sprite):
 	def __init__(self,pos_x,pos_y):
 		super().__init__()
-		self.image = pygame.image.load('images/mouse.png').convert_alpha()
+		self.image = pygame.image.load('images/man from the poster transparent.png').convert_alpha()
 		self.rect = self.image.get_rect()
 		pos_x = self.rect.x
 		pos_y = self.rect.y
