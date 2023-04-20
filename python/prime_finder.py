@@ -1,25 +1,49 @@
 import sys
 
 
-def find_prime(n):
-    
-    i = int(2)
-    while i < n:
+def find_prime(the_number):
+    primes300 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293]
+    onetimething=True
+    the_checker = int(2)
+    while the_checker < the_number:
         
-        if n%i != 0 :
+
+        if the_checker > 62 and onetimething == True:
+            the_checker += 231
+            onetimething = False
+
+        if onetimething == True:
             
-            i += 1
-            if i == n:
-                return  True
-               
-        else: 
-            return False
-            break  
+            if primes300[the_checker - 1] % the_checker!= 0 :
+                
+                the_checker += 1
+                if the_checker == the_number:
+                    return  True
+                
+            else: 
+                return False
+                break 
+
+        else:
+            if the_number % the_checker != 0 :
+                
+                the_checker += 1
+                if the_checker == the_number:
+                    return  True
+                
+            else: 
+                return False
+                break
         
 # varablies
+
+
+
 primes = []
 finder = int(input('to   :'))
 amount = int(input('from :'))
+starting_point = finder
+
 if finder > amount:
     print('the first number must be the smaller number')
     sys.exit()
@@ -47,7 +71,7 @@ while not_done:
         not_done = False
     
     
-    precent_done = finder / process_amount * 100
+    precent_done = (finder - starting_point) / process_amount * 100
     
     
     print(int(precent_done),'%')
