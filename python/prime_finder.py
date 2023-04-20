@@ -1,25 +1,31 @@
 import sys
 
 
-def find_prime(n):
-    
-    i = int(2)
-    while i < n:
+def find_prime(the_number):
+    if the_number <= 1:
+        return False
         
-        if n%i != 0 :
-            
-            i += 1
-            if i == n:
-                return  True
-               
-        else: 
+    the_checker = 2
+    while the_checker * the_checker <= the_number:
+        if the_number % the_checker == 0:
             return False
-            break  
+        if the_checker > 2:
+            the_checker += 2
+        else:
+            the_checker += 1
+
+    return True
+
         
 # varablies
+
+
+
 primes = []
 finder = int(input('to   :'))
 amount = int(input('from :'))
+starting_point = finder
+
 if finder > amount:
     print('the first number must be the smaller number')
     sys.exit()
@@ -47,10 +53,11 @@ while not_done:
         not_done = False
     
     
-    precent_done = finder / process_amount * 100
+    precent_done = (finder - starting_point) / process_amount * 100
     
     
     print(int(precent_done),'%')
     finder += 2     
 
-print(primes,'rock and stone')
+print(primes)
+print('prime_finder.py')

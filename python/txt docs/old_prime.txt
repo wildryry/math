@@ -1,0 +1,21 @@
+can you make this code skip checking composite numbers  so it runs faster
+
+def find_prime(the_number):
+        
+    the_checker = int(2)
+    while the_checker < the_number:
+
+        
+        if the_number % the_checker != 0 :
+            if the_checker > 2:
+                the_checker += 2
+
+            else:
+                the_checker += 1
+
+            if the_checker == the_number:
+                return  True
+                
+        else: 
+            return False
+            break

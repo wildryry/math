@@ -1,23 +1,18 @@
 
-def find_prime(n):
-    x = 0
-    i = int(2)
-    while i < n:
+def find_prime(the_number):
+    if the_number <= 1:
+        return False
         
-        
-        x = n%i
-        
-        
-        if x != 0 :
-            
-            i = (i + 1)
-            if i == n:
-                return  True
-               
-        else: 
+    the_checker = 2
+    while the_checker * the_checker <= the_number:
+        if the_number % the_checker == 0:
             return False
-            break  
-    return True   
+        if the_checker > 2:
+            the_checker += 2
+        else:
+            the_checker += 1
+
+            
 check_prime2 = False
 
 num2 = 2
