@@ -2,7 +2,9 @@ import pygame
 import sys
 # Set up Pygame
 pygame.init()
-size = (800, 600)
+wn_x = 800
+wn_y = 600
+size = (wn_x, wn_y)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Linear Line Graph")
 
@@ -12,7 +14,8 @@ WHITE = (255, 255, 255)
 GREEN = (24, 135, 7)
 BLUE = (43, 94, 214)
 # Define the equation of the line (y = mx + b)
-m = 2
+m = .12
+#   100
 b = 0
 
 # Define the x and y values to plot
@@ -29,15 +32,27 @@ while not done:
             done = True
 
     
-    
-
-    # Clear the screen test.py
+    # Color the screen 
     screen.fill(BLACK)
 
-    # Draw the line
-    pygame.draw.aaline(screen, GREEN, [400, (-1*b + 300)], [800, int(-1*m * 800 + b)], 5)
-    pygame.draw.aaline(screen, GREEN, [400, (-1*b + 300)], [800, int(*m * 800 + b)], 5)
+
+ # Draw the orgin point
+
+    pygame.draw.aaline(screen, BLUE, ((wn_x/2),0), ((wn_x/2),wn_y), 5)
+    pygame.draw.aaline(screen, BLUE, (0,(wn_y/2)), (wn_x,(wn_y/2)), 5)
+
+
+    # Draw the lines
+    pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (wn_x, int(-1*m * wn_x + b + (wn_y/2))), 5)
     
+    if m >= 1: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + b + (wn_y/2))), 5)
+    
+    else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + b + (wn_y/2))), 5) 
+    
+    
+    print(1/m * 800 + b + 300)
+   
+
     # Update the screen
     pygame.display.flip()
     
