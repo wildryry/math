@@ -3,7 +3,7 @@ import sys
 # Set up Pygame
 pygame.init()
 wn_x = 800
-wn_y = 600
+wn_y = 800
 size = (wn_x, wn_y)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Linear Line Graph")
@@ -14,8 +14,10 @@ WHITE = (255, 255, 255)
 GREEN = (24, 135, 7)
 BLUE = (43, 94, 214)
 # Define the equation of the line (y = mx + b)
-m = 1
-#   100
+rise = int(input('rise :'))
+run = int(input('run :'))
+
+m = (rise/run)/2
 b = 0
 
 # Define the x and y values to plot
