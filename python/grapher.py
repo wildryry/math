@@ -50,7 +50,6 @@ while not done:
     else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + b + (wn_y/2))), 5) 
     
     
-    print(1/m * 800 + b + 300)
    
 
     # Update the screen
