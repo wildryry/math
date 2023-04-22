@@ -22,11 +22,12 @@ WHITE = (255, 255, 255)
 GREEN = (24, 135, 7)
 BLUE = (43, 94, 214)
 # Define the equation of the line (y = mx + b)
-
+# m = (rise/run)/2
+# run != 0
 rise = 0
 
 run = 1
-#m = (rise/run)/2
+
 b = 0
 
 
@@ -108,29 +109,42 @@ while not done:
 
         if rise_choosen == False:    
         
-            rise_number_surface = text.render(f'Rise :{rise}',False,GREEN)
+            rise_number_surface = text.render(f'-> Rise :{rise}',False,GREEN)
             rise_number_rect = rise_number_surface.get_rect(midtop = ((wn_x/2),(wn_y/2 + 100)))
+            run_number_surface = text.render(f'Run :{run}',False,GREEN)
+            run_number_rect = run_number_surface.get_rect(midtop = ((wn_x/2),(wn_y/2 + 200)))
+            y_int_number_surface = text.render(f'y int :{b}',False,GREEN)
+            y_int_number_rect = y_int_number_surface.get_rect(midtop = ((wn_x/2),(wn_y/2 + 300)))
+
 
             screen.fill(WHITE)
 
             screen.blit(rise_number_surface,rise_number_rect)
-        
+            screen.blit(run_number_surface,run_number_rect)
+            screen.blit(y_int_number_surface,y_int_number_rect)
         
         elif run_gotten == False:
-        
-            run_number_surface = text.render(f'Run :{run}',False,GREEN)
+            
+            rise_number_surface = text.render(f'Rise :{rise}',False,GREEN)
+            rise_number_rect = rise_number_surface.get_rect(midtop = ((wn_x/2),(wn_y/2 + 100)))
+            run_number_surface = text.render(f'-> Run :{run}',False,GREEN)
             run_number_rect = run_number_surface.get_rect(midtop = ((wn_x/2),(wn_y/2 + 200)))
+            y_int_number_surface = text.render(f'y int :{b}',False,GREEN)
+            y_int_number_rect = y_int_number_surface.get_rect(midtop = ((wn_x/2),(wn_y/2 + 300)))
 
             screen.fill(WHITE)
 
             screen.blit(run_number_surface,run_number_rect)
             screen.blit(rise_number_surface,rise_number_rect)
-        
+            screen.blit(y_int_number_surface,y_int_number_rect)
         
         else:
-            y_int_number_surface = text.render(f'y int :{b}',False,GREEN)
+            
+            run_number_surface = text.render(f'Run :{run}',False,GREEN)
+            run_number_rect = run_number_surface.get_rect(midtop = ((wn_x/2),(wn_y/2 + 200)))
+            y_int_number_surface = text.render(f'-> y int :{b}',False,GREEN)
             y_int_number_rect = y_int_number_surface.get_rect(midtop = ((wn_x/2),(wn_y/2 + 300)))
-
+            
             screen.fill(WHITE)
 
             screen.blit(run_number_surface,run_number_rect)
