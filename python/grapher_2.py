@@ -1,5 +1,7 @@
 import pygame
+
 import sys
+
 # Set up Pygame
 pygame.init()
 wn_x = 800
@@ -16,6 +18,15 @@ text = pygame.font.Font('fonts/data-latin.ttf',50)
 image_surface = pygame.image.load('images/man from the poster transparent.png')
 image_rect = image_surface.get_rect(midtop = ((wn_x/2),(wn_y/2 - 300)))
 
+# Define a funtion 
+def mouse_input_teller():
+    if pygame.mouse.get_pos[0] > wn_x or pygame.mouse.get_pos[0] > 0 or pygame.mouse.get_pos[1] > wn_y or pygame.mouse.get_pos[1] < 0:
+        return True
+    else:
+        return False
+
+
+
 # Define colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -31,6 +42,7 @@ run = 1
 b = 0
 
 
+mouse_input = False
 
 rise_choosen = False
 
@@ -168,12 +180,19 @@ while not done:
 
 
         # Draw the lines
-        pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
-    
-        if m >= 1: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
-    
-        else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
-    
+        if mouse_input_teller:
+            pygame.draw.aaline(screen, GREEN, pygame.mouse.get_pos(), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
+        
+            if m >= 1: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
+        
+            else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
+        
+        else:
+            pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
+        
+            if m >= 1: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
+        
+            else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
         
    
 
@@ -183,7 +202,10 @@ while not done:
     
 
     # Wait for a short period of time to control the frame rate
-    clock.tick(5)
+    if mouse_input_teller():
+        clock.tick(60)
+    else:
+        clock.tick(5)
 
 # Quit Pygame
 pygame.quit()
