@@ -51,6 +51,8 @@ run = 1
 
 b = 0
 
+line_speed = 0
+
 mouse_is_down = False
 
 mouse_input = False
@@ -85,8 +87,15 @@ while not done:
 
 
         if event.type == pygame.MOUSEBUTTONDOWN:
+            
             mouse_is_down = True
             starting_point = pygame.mouse.get_pos()
+            
+            vector2= pygame.math.Vector2((wn_x/2), -1*b + (wn_y/2))
+            vector1 = pygame.math.Vector2(starting_point)
+            
+            line_speed = vector1.distance_to(vector2)
+            
         else:
             mouse_is_down = False
 
@@ -199,7 +208,7 @@ while not done:
         pygame.draw.aaline(screen, BLUE, ((wn_x/2),0), ((wn_x/2),wn_y), 5)
         pygame.draw.aaline(screen, BLUE, (0,(wn_y/2)), (wn_x,(wn_y/2)), 5)
 
-
+        
         # Draw the lines
         if mouse_input_teller and mouse_is_down:
             pygame.draw.aaline(screen, GREEN, pygame.mouse.get_pos(), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
@@ -208,14 +217,41 @@ while not done:
         
             else: pygame.draw.aaline(screen, GREEN, pygame.mouse.get_pos(), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
         
-        else:
+        elif line_speed == 0:
             pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
         
             if m >= 1: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
         
             else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
+            
+        else:
+            pygame.draw.aaline(screen, GREEN, (int(vector1[0]),int(vector1[1])), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
         
+            if m >= 1: pygame.draw.aaline(screen, GREEN, (int(vector1[0]),int(vector1[1])), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
+        
+            else: pygame.draw.aaline(screen, GREEN, (int(vector1[0]),int(vector1[1])), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
+
+
+            print(x_distance,y_distance)
+
+
         #add the use of vectors to make line bounce
+
+        if line_speed != 0:
+            vector1 = vector1.move_towards(vector2,line_speed)
+            
+
+        # something to Define the line speed
+        if line_speed != 0:
+            line_speed += line_speed + vector1.distance_to(vector2)/10
+
+        # finding the distance in x and y 
+        if mouse_is_down == True:  
+            x_distance = starting_point[0] - wn_x/2
+            y_distance = starting_point[1]*-1 - wn_y/2 + -1*b
+            
+
+
 
     # Update the screen
     pygame.display.flip()
