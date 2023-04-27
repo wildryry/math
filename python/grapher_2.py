@@ -5,33 +5,43 @@ import sys
 # Set up Pygame
 pygame.init()
 wn_x = 800
-wn_y = 800
+wn_y = 800 #min of 700
 size = (wn_x, wn_y)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Linear Line Graph")
-
-# Fonts
-text = pygame.font.Font('fonts/data-latin.ttf',50)
-
-# Define a new surface and rect
-
-image_surface = pygame.image.load('images/man from the poster transparent.png')
-image_rect = image_surface.get_rect(midtop = ((wn_x/2),(wn_y/2 - 300)))
-
-# Define a funtion 
-def mouse_input_teller():
-    if pygame.mouse.get_pos[0] > wn_x or pygame.mouse.get_pos[0] > 0 or pygame.mouse.get_pos[1] > wn_y or pygame.mouse.get_pos[1] < 0:
-        return True
-    else:
-        return False
-
-
 
 # Define colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (24, 135, 7)
 BLUE = (43, 94, 214)
+
+
+# Fonts
+text = pygame.font.Font('fonts/data-latin.ttf',50)
+small_text = pygame.font.Font('fonts/data-latin.ttf',15)
+# Define a new surface and rect
+
+image_surface = pygame.image.load('images/man from the poster transparent.png')
+image_rect = image_surface.get_rect(midtop = ((wn_x/2),(wn_y/2 - 300)))
+
+# Define a new surface for text
+
+instructions = small_text.render('use the up and down arow to select a number press enter if you want to go back press Esc', False, GREEN )
+instructions_rect = instructions.get_rect(midtop =((wn_x/2) , 100))
+
+# Define a funtion 
+
+def mouse_input_teller():
+    if pygame.mouse.get_pos()[0] < wn_x and pygame.mouse.get_pos()[0] > 0 and pygame.mouse.get_pos()[1] < wn_y and pygame.mouse.get_pos()[1] > 0:
+        return True
+    else:
+        return False
+
+
+
+
+
 # Define the equation of the line (y = mx + b)
 # m = (rise/run)/2
 # run != 0
@@ -41,6 +51,7 @@ run = 1
 
 b = 0
 
+mouse_is_down = False
 
 mouse_input = False
 
@@ -72,12 +83,20 @@ while not done:
                 run_gotten = False
                 slope_gotten = False
 
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_is_down = True
+            starting_point = pygame.mouse.get_pos()
+        else:
+            mouse_is_down = False
+
     if unfinshed:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             
+
         if event.type == pygame.KEYDOWN:
         
             if event.key == pygame.K_UP:
@@ -87,6 +106,8 @@ while not done:
                     run += 1       
                 else:
                     b += 10
+
+          
 
             if event.key == pygame.K_DOWN:
                 if rise_choosen == False:    
@@ -165,7 +186,7 @@ while not done:
 
         #the random image
         screen.blit(image_surface,image_rect)
-
+        screen.blit(instructions,instructions_rect)
 
     if slope_gotten == True:
        
@@ -180,12 +201,12 @@ while not done:
 
 
         # Draw the lines
-        if mouse_input_teller:
+        if mouse_input_teller and mouse_is_down:
             pygame.draw.aaline(screen, GREEN, pygame.mouse.get_pos(), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
         
-            if m >= 1: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
+            if m >= 1: pygame.draw.aaline(screen, GREEN, pygame.mouse.get_pos(), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
         
-            else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
+            else: pygame.draw.aaline(screen, GREEN, pygame.mouse.get_pos(), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
         
         else:
             pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
@@ -194,7 +215,7 @@ while not done:
         
             else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
         
-   
+        #add the use of vectors to make line bounce
 
     # Update the screen
     pygame.display.flip()
@@ -202,7 +223,7 @@ while not done:
     
 
     # Wait for a short period of time to control the frame rate
-    if mouse_input_teller():
+    if mouse_input_teller() and slope_gotten:
         clock.tick(60)
     else:
         clock.tick(5)
