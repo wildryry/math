@@ -250,6 +250,10 @@ while not done:
             x_distance = starting_point[0] - wn_x/2
             y_distance = starting_point[1]*-1 - wn_y/2 + -1*b
             
+            x_distance_squared = x_distance*x_distance
+            y_distance_squared = y_distance*y_distance
+            x_and_y = x_distance_squared + y_distance_squared
+            
 
 
 
