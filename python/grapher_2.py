@@ -1,5 +1,6 @@
+from gc import disable
 import pygame
-
+import math
 import sys
 
 # Set up Pygame
@@ -91,10 +92,15 @@ while not done:
             mouse_is_down = True
             starting_point = pygame.mouse.get_pos()
             
-            vector2= pygame.math.Vector2((wn_x/2), -1*b + (wn_y/2))
-            vector1 = pygame.math.Vector2(starting_point)
+            x_distance = starting_point[0] - wn_x/2
+            y_distance = starting_point[1]*-1 - wn_y/2 + -1*b
             
-            line_speed = vector1.distance_to(vector2)
+            x_distance_squared = x_distance*x_distance
+            y_distance_squared = y_distance*y_distance
+            x_and_y = x_distance_squared + y_distance_squared
+            distance_to_end = math.sqrt(x_and_y)
+            
+            line_speed = distance_to_end*0.2
             
         else:
             mouse_is_down = False
@@ -225,34 +231,28 @@ while not done:
             else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
             
         else:
-            pygame.draw.aaline(screen, GREEN, (int(vector1[0]),int(vector1[1])), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
+            pygame.draw.aaline(screen, GREEN, ((-1*x_distance-line_speed),(-1*y_distance - line_speed)), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
         
-            if m >= 1: pygame.draw.aaline(screen, GREEN, (int(vector1[0]),int(vector1[1])), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
+            if m >= 1: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
         
-            else: pygame.draw.aaline(screen, GREEN, (int(vector1[0]),int(vector1[1])), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
+            else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
 
 
-            print(x_distance,y_distance)
+            print((x_distance-line_speed),(y_distance-line_speed))
 
 
-        #add the use of vectors to make line bounce
+        #add the use of pythagus to make line bounce
 
-        if line_speed != 0:
-            vector1 = vector1.move_towards(vector2,line_speed)
+        #if line_speed != 0:
+            
             
 
         # something to Define the line speed
-        if line_speed != 0:
-            line_speed += line_speed + vector1.distance_to(vector2)/10
+        
+            
 
         # finding the distance in x and y 
-        if mouse_is_down == True:  
-            x_distance = starting_point[0] - wn_x/2
-            y_distance = starting_point[1]*-1 - wn_y/2 + -1*b
-            
-            x_distance_squared = x_distance*x_distance
-            y_distance_squared = y_distance*y_distance
-            x_and_y = x_distance_squared + y_distance_squared
+
             
 
 
