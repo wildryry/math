@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<MyObjectBuilder_LastSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Path>C:\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\Content\CustomWorlds\Earth Planet\PC</Path>
+  <IsContentWorlds>true</IsContentWorlds>
+  <IsOnline>false</IsOnline>
+  <IsLobby>false</IsLobby>
+  <GameName>Earth Planet </GameName>
+  <ServerPort>0</ServerPort>
+</MyObjectBuilder_LastSession>
