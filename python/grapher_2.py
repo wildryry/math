@@ -100,7 +100,7 @@ while not done:
             x_and_y = x_distance_squared + y_distance_squared
             distance_to_end = math.sqrt(x_and_y)
             
-            line_speed = distance_to_end*0.2
+            line_speed = 1
             
         else:
             mouse_is_down = False
@@ -231,20 +231,20 @@ while not done:
             else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
             
         else:
-            pygame.draw.aaline(screen, GREEN, ((x_distance-line_speed),(-1*y_distance - line_speed)), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
+            pygame.draw.aaline(screen, GREEN, ((-1*x_distance * line_speed),(y_distance * line_speed)), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
         
             if m >= 1: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
         
             else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
 
 
-            print((x_distance-line_speed),(y_distance-line_speed))
+            print((x_distance*line_speed),(y_distance*line_speed))
 
 
         #add the use of pythagus to make line bounce
 
-        if line_speed != 0:
-            line_speed -= 1
+        if line_speed != 0 and line_speed >= 0:
+            line_speed -= .01
             
             
 
