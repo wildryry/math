@@ -88,7 +88,7 @@ while not done:
 
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            
+            line_speed = 0
             mouse_is_down = True
             starting_point = pygame.mouse.get_pos()
             
@@ -231,7 +231,7 @@ while not done:
             else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
             
         else:
-            pygame.draw.aaline(screen, GREEN, ((-1*x_distance-line_speed),(-1*y_distance - line_speed)), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
+            pygame.draw.aaline(screen, GREEN, ((x_distance-line_speed),(-1*y_distance - line_speed)), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
         
             if m >= 1: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
         
@@ -243,7 +243,8 @@ while not done:
 
         #add the use of pythagus to make line bounce
 
-        #if line_speed != 0:
+        if line_speed != 0:
+            line_speed -= 1
             
             
 
