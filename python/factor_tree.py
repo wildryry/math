@@ -1,18 +1,23 @@
 
 def find_prime(the_number):
+
     if the_number <= 1:
         return False
         
-    the_checker = 2
+    if the_number == 2:
+        return True
+
+    if the_number % 2 == 0:
+        return False
+
+    the_checker = 3
     while the_checker * the_checker <= the_number:
         if the_number % the_checker == 0:
             return False
-        if the_checker > 2:
-            the_checker += 2
-        else:
-            the_checker += 1
+        the_checker += 2
 
-            
+    return True
+        
 check_prime2 = False
 
 num2 = 2
