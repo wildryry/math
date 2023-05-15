@@ -30,16 +30,21 @@ class Button(pygame.sprite.Sprite):
 		self.image = pygame.image.load('images/boogie_button.png')
 		self.rect = self.image.get_rect()
 		self.time = time
+		self.x = pos_x
+		self.y = pos_y
+		self.rect.x = pos_x
+		self.rect.y = pos_y
 	
 	def update(self):
 		
-		self.image = pygame.image.load('images/boogie_button.png')
-		self.rect = self.image.get_rect()
-		self.rect.x += 0.01
-		self.rect.y += 0.5
+		#print('update')
+		print(self.rect.move(0.1,0.05))
 
 		
+
 		
+def heheha(low , high):
+	return randint(low,high)
 		
 
 		
@@ -51,7 +56,7 @@ screen = pygame.display.set_mode((ground.get_width(),400))
 #Button
 button = Button(100,300,200)
 button_group = pygame.sprite.Group()
-
+#button_group.add(button)
 
 #mouse
 mouse = Mouse(300,200)
@@ -61,8 +66,9 @@ mouse_group.add(mouse)
 
 #all sprites
 all_sprites = pygame.sprite.Group()
+#all_sprites.add(button)
 all_sprites.add(mouse)
-all_sprites.add(button)
+
 
 back_ground_rect = pygame.Surface.get_rect(screen)
 
@@ -77,12 +83,21 @@ pygame.time.set_timer(pygame.USEREVENT+1, 1100)
 
 
 
-def buuton():
-	for x in range(100):
+def buuton(offset):
+	x = randint(0,600)
+	y = randint(10,400)
+	
 
-		button.rect.y = randint(10,390)
-		button.rect.x = randint(0,600)
-		button_group.add(button)
+	for i in range(15):
+		
+		
+		new_button = Button(100,x,y)
+		
+		button_group.add(new_button)
+		all_sprites.add(new_button)
+
+
+buuton(30)
 
 while not done:
 
@@ -102,10 +117,12 @@ while not done:
 
 	screen.blit(sky,(0,0))
 	screen.blit(ground ,(0,360))
-	
+
+
 
 	button_group.update()
-	
+	#for buttons in button_group:
+	#	print(buttons.rect.y)
 
 	#mouse sprite things
 	
@@ -114,7 +131,7 @@ while not done:
 
 	for enitys in all_sprites:
 		screen.blit(enitys.image, enitys.rect)
-	
+	print(all_sprites)
 	
 	pygame.display.update()
 	clock.tick(60)
