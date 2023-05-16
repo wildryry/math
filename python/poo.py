@@ -39,7 +39,7 @@ class Button(pygame.sprite.Sprite):
 	def update(self):
 		
 		self.rect.y += 1
-		print(self.rect)
+		print(self.rect.y)
 
 		if self.rect.y <= 410:
 			self.kill()
@@ -60,8 +60,8 @@ screen = pygame.display.set_mode((ground.get_width(),400))
 
 
 #Button
-button_group = pygame.sprite.Group()
 new_button = Button(100,200,200)
+button_group = pygame.sprite.Group()
 button_group.add(new_button)
 
 
@@ -73,8 +73,9 @@ mouse_group.add(mouse)
 
 #all sprites
 all_sprites = pygame.sprite.Group()
-all_sprites.add(new_button)
+
 all_sprites.add(mouse)
+all_sprites.add(new_button)
 
 
 back_ground_rect = pygame.Surface.get_rect(screen)
@@ -91,17 +92,17 @@ pygame.time.set_timer(pygame.USEREVENT+1, 1100)
 funny = 0
 
 def buuton(offset,x,y):
-	newy = y
+	
 	
 
 	for i in range(15):
 		
-		newy = i * offset
+		newy = i * offset + y
 		
 		if y <= 410:
 			
-		
-			new_button = Button(100,x,y)
+			
+			new_button = Button(100,x,newy)
 			button_group.add(new_button)
 			all_sprites.add(new_button)
 
@@ -121,6 +122,8 @@ while not done:
 	
 		if event.type == pygame.USEREVENT+1:
 			print('event' , all_sprites)
+			button_group.add(new_button)
+			all_sprites.add(new_button)
 			
 
 	
