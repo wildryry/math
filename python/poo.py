@@ -37,8 +37,10 @@ class Button(pygame.sprite.Sprite):
 	
 	def update(self):
 		
-		#print('update')
-		print(self.rect.move(0.1,0.05))
+		print('update')
+		
+		self.kill()
+		
 
 		
 
@@ -81,23 +83,28 @@ clock = pygame.time.Clock()
 
 pygame.time.set_timer(pygame.USEREVENT+1, 1100)
 
+funny = 0
 
-
-def buuton(offset):
-	x = randint(0,600)
-	y = randint(10,400)
+def buuton(offset,x,y):
+	#x = randint(0,600)
+	#y = randint(10,300)
 	
 
 	for i in range(15):
 		
+		#x += i*(0.5 + offset)
+		y += i*(0.5 + offset)
 		
-		new_button = Button(100,x,y)
+		if y <= 410:
+			new_button = Button(100,x,y)
 		
-		button_group.add(new_button)
-		all_sprites.add(new_button)
+
+			button_group.add(new_button)
+			all_sprites.add(new_button)
 
 
-buuton(30)
+
+
 
 while not done:
 
@@ -118,11 +125,13 @@ while not done:
 	screen.blit(sky,(0,0))
 	screen.blit(ground ,(0,360))
 
-
-
 	button_group.update()
-	#for buttons in button_group:
-	#	print(buttons.rect.y)
+
+	buuton(funny,200,100)
+	funny +=0.01
+
+	
+	
 
 	#mouse sprite things
 	
@@ -131,7 +140,7 @@ while not done:
 
 	for enitys in all_sprites:
 		screen.blit(enitys.image, enitys.rect)
-	print(all_sprites)
+	
 	
 	pygame.display.update()
 	clock.tick(60)
