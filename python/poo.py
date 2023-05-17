@@ -32,16 +32,33 @@ class Button(pygame.sprite.Sprite):
 		super().__init__()
 		self.image = pygame.image.load('images/boogie_button.png')
 		self.rect = self.image.get_rect()
-		self.time = time
 		self.rect.x = pos_x
 		self.rect.y = pos_y
+		self.time = randint(time,time+50)
+		self.time_left = 0
+
 	
 	def update(self):
 		
-		self.rect.y += 1
-		print(self.rect.y)
+		self.rect.y += 0.05
+		self.time_left += randint(0,1)
+		
+		print(self.time_left)
 
-		if self.rect.y <= 410:
+		if self.time_left >= self.time:
+			self.kill()
+			None
+
+		for event in pygame.event.get():	
+
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				for sprites in len(button_group):
+					None
+
+		
+	
+	def new(self):
+		if self.rect.collidepoint(pygame.mouse.get_pos()):
 			self.kill()
 		
 	def draw(self , surface):
@@ -49,20 +66,20 @@ class Button(pygame.sprite.Sprite):
 		
 
 		
-def heheha(low , high):
-	return randint(low,high)
-		
 
 		
 
+screen_width = 600
+screen_hight = 400
 
-screen = pygame.display.set_mode((ground.get_width(),400))
 
+screen = pygame.display.set_mode((screen_width,screen_hight))
+print(ground.get_width())
 
 #Button
-new_button = Button(100,200,200)
+
 button_group = pygame.sprite.Group()
-button_group.add(new_button)
+
 
 
 #mouse
@@ -75,7 +92,7 @@ mouse_group.add(mouse)
 all_sprites = pygame.sprite.Group()
 
 all_sprites.add(mouse)
-all_sprites.add(new_button)
+
 
 
 back_ground_rect = pygame.Surface.get_rect(screen)
@@ -91,24 +108,27 @@ pygame.time.set_timer(pygame.USEREVENT+1, 1100)
 
 funny = 0
 
-def buuton(offset,x,y):
+def new_button(amount):
 	
 	
 
-	for i in range(15):
+	for i in range(amount):
 		
-		newy = i * offset + y
+		y = randint(10,screen_hight-10)
+
+		x = randint(10,screen_width-10)
 		
-		if y <= 410:
+		if y <= 410 and y >= 0:
 			
 			
-			new_button = Button(100,x,newy)
+			new_button = Button(75,x,y)
 			button_group.add(new_button)
 			all_sprites.add(new_button)
 
 
 
-
+buttons = 5
+new_button(buttons)
 
 while not done:
 
@@ -120,11 +140,19 @@ while not done:
 			
 			print(pygame.key.get_pressed())
 	
+		if event.type == pygame.MOUSEBUTTONDOWN:
+			None
+
 		if event.type == pygame.USEREVENT+1:
-			print('event' , all_sprites)
-			button_group.add(new_button)
-			all_sprites.add(new_button)
+
+			if len(button_group) == 0:
+				new_button(buttons)
+			None
 			
+			
+			
+			
+
 
 	
 
@@ -137,10 +165,14 @@ while not done:
 
 	#mouse sprite things
 	
+	
+	
+
 
 	mouse_group.update()
 
-	all_sprites.draw(screen)
+	button_group.draw(screen)
+	mouse_group.draw(screen)
 	
 	
 	
