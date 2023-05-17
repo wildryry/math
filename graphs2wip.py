@@ -132,7 +132,7 @@ origin_x: int = int(WIDTH/2)
 origin_y: int = int(HEIGHT/2)
 # scale factors
 scale_x: float = 1
-scale_y: float = 1
+scale_y: float = .07
 
 
 # Math points and screen points are quite different. Math points are real
@@ -314,6 +314,9 @@ def slope_interceptp(m: float,b: float,x: float) -> float:
     return m*x+b
 
 
+
+
+
 # In mathematical practice, we give the m and b first, and keep x as a variable.
 # Here is a way to do this in python. We define a function which takes in our
 # parameters, and output a function defined in terms of those parameters, which
@@ -325,6 +328,13 @@ def slope_intercept(m,b):
         return m*x+b
     return f
 
+def factored_quadratic(p: float,q: float) -> float:
+    def f(x: float) -> float:
+        return (x-p)*(x-q)
+    return f
+
+
+
 
 # a parabola, for fun
 def parabola(a,b,c):
@@ -334,7 +344,7 @@ def parabola(a,b,c):
 
 # Now we can draw a bunch of graphs of functions
 
-#draw_graph_of_function(slope_intercept(1/3,100))
+draw_graph_of_function(factored_quadratic(0,100))
 
 
 # What if we want to draw the set of points which are the solution to any
