@@ -39,7 +39,34 @@ def mouse_input_teller():
     else:
         return False
 
+#Define a funtion for movement 
+def move_point(rect,end_point):
+    global rect_speed
+    
+    rect_speed = 0
+    print(rect[0])
+    if rect[0] - end_point[0] < 0: x_dif = -1*(rect[0] - end_point[0])
+    else: x_dif = rect[0] - end_point[0]
+    if rect[1] - end_point[1] < 0: y_dif = -1*(rect[1] - end_point[1])
+    else: y_dif = rect[1] - end_point[1]
 
+    if x_dif == 0 and y_dif == 0:
+        rect_speed = 0
+        rect[0] = end_point[0]
+        rect.y = end_point[1]
+    elif rect_speed < 1:
+        rect_speed += 0.15 
+
+    if rect[0] < end_point[0]:
+        rect[0] += x_dif*rect_speed
+    elif rect[0] > end_point[0]:
+        rect[0] += x_dif*-rect_speed
+    if rect[1] < end_point[1]:
+        rect[1] += y_dif*rect_speed
+    elif rect[1] > end_point[1]:
+        rect[1] += y_dif*-rect_speed
+
+    return rect
 
 
 
@@ -51,6 +78,12 @@ rise = 0
 run = 1
 
 b = 0
+
+#rect for moving points
+middle_point_rect = pygame.Rect(0,0,1,1)
+print(middle_point_rect.x)
+
+rect_speed = 0
 
 line_speed = 0
 
@@ -88,19 +121,10 @@ while not done:
 
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            line_speed = 0
+            
             mouse_is_down = True
-            starting_point = pygame.mouse.get_pos()
+            middle_point_rect = pygame.mouse.get_pos()
             
-            x_distance = starting_point[0] - wn_x/2
-            y_distance = starting_point[1]*-1 - wn_y/2 + -1*b
-            
-            x_distance_squared = x_distance*x_distance
-            y_distance_squared = y_distance*y_distance
-            x_and_y = x_distance_squared + y_distance_squared
-            distance_to_end = math.sqrt(x_and_y)
-            
-            line_speed = 1
             
         else:
             mouse_is_down = False
@@ -223,7 +247,7 @@ while not done:
         
             else: pygame.draw.aaline(screen, GREEN, pygame.mouse.get_pos(), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
         
-        elif line_speed == 0:
+        elif rect_speed == 0:
             pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
         
             if m >= 1: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
@@ -231,20 +255,18 @@ while not done:
             else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
             
         else:
-            pygame.draw.aaline(screen, GREEN, ((-1*x_distance * line_speed),(y_distance * line_speed)), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
+            pygame.draw.aaline(screen, GREEN, ((middle_point_rect.x),(middle_point_rect.y)), (wn_x, int(-1*m * wn_x + -1*b + (wn_y/2))), 5)
         
             if m >= 1: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5)
         
             else: pygame.draw.aaline(screen, GREEN, ((wn_x/2), -1*b + (wn_y/2)), (0, int(m * wn_x + -1*b + (wn_y/2))), 5) 
 
 
-            print((x_distance*line_speed),(y_distance*line_speed))
-
+            #print(middle_point_rect.x, middle_point_rect.y)
 
         #add the use of pythagus to make line bounce
-
-        if line_speed != 0 and line_speed >= 0:
-            line_speed -= .01
+        print(middle_point_rect[0])
+        middle_point_rect = move_point(middle_point_rect,((wn_x/2), -1*b + (wn_y/2)))
             
             
 
@@ -267,7 +289,7 @@ while not done:
     if mouse_input_teller() and slope_gotten:
         clock.tick(60)
     else:
-        clock.tick(5)
+        clock.tick(1)
 
 # Quit Pygame
 pygame.quit()
