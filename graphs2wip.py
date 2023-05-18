@@ -215,6 +215,7 @@ def translate_inv_x(x):
 pygame.draw.aaline(screen,BLUE,(origin_x,0),(origin_x,HEIGHT),5)
 pygame.draw.aaline(screen,BLUE,(0,origin_y),(WIDTH,origin_y),5)
 
+print(MathPoint.x )
 
 # I'd like to write both of these in terms of the to_math() function but I
 # haven't figured out the right way to do it

@@ -1,3 +1,4 @@
+from tkinter import CENTER
 import pygame 
 
 import sys
@@ -11,6 +12,11 @@ pygame.display.init()
 ground = pygame.image.load('images/ground.png')
 sky = pygame.image.load('images/sky.png')
 
+
+mouse_down = False 
+score = 0
+
+score_text = pygame.font.Font('fonts/data-latin.ttf',50)
 
 
 class Mouse(pygame.sprite.Sprite):
@@ -31,11 +37,14 @@ class Button(pygame.sprite.Sprite):
 	def __init__(self, time, pos_x, pos_y,):
 		super().__init__()
 		self.image = pygame.image.load('images/boogie_button.png')
-		self.rect = self.image.get_rect()
-		self.rect.x = pos_x
-		self.rect.y = pos_y
+		self.rect = self.image.get_rect(center = (pos_x,pos_y))
+		#self.rect.x = pos_x
+		#self.rect.y = pos_y
 		self.time = randint(time,time+50)
 		self.time_left = 0
+		if pygame.sprite.spritecollide(self, button_group, True, collided = None):
+			self.kill()
+			new_button(1)
 
 	
 	def update(self):
@@ -43,23 +52,22 @@ class Button(pygame.sprite.Sprite):
 		self.rect.y += 0.05
 		self.time_left += randint(0,1)
 		
-		print(self.time_left)
+		
 
 		if self.time_left >= self.time:
 			self.kill()
 			None
-
-		for event in pygame.event.get():	
-
-			if event.type == pygame.MOUSEBUTTONDOWN:
-				for sprites in len(button_group):
-					None
+		
+			
+		if	self.rect.collidepoint(pygame.mouse.get_pos()) and mouse_down:
+			self.kill()
+			
+			None
+			
 
 		
 	
-	def new(self):
-		if self.rect.collidepoint(pygame.mouse.get_pos()):
-			self.kill()
+	
 		
 	def draw(self , surface):
 		surface.blit(self.image , self.rect)
@@ -74,7 +82,7 @@ screen_hight = 400
 
 
 screen = pygame.display.set_mode((screen_width,screen_hight))
-print(ground.get_width())
+
 
 #Button
 
@@ -104,7 +112,7 @@ pygame.mouse.set_visible(False)
 
 clock = pygame.time.Clock()  
 
-pygame.time.set_timer(pygame.USEREVENT+1, 1100)
+pygame.time.set_timer(pygame.USEREVENT+1, 1)
 
 funny = 0
 
@@ -114,9 +122,9 @@ def new_button(amount):
 
 	for i in range(amount):
 		
-		y = randint(10,screen_hight-10)
+		y = randint(30,screen_hight-30)
 
-		x = randint(10,screen_width-10)
+		x = randint(50,screen_width-50) 
 		
 		if y <= 410 and y >= 0:
 			
@@ -141,16 +149,20 @@ while not done:
 			print(pygame.key.get_pressed())
 	
 		if event.type == pygame.MOUSEBUTTONDOWN:
-			None
+			mouse_down = True
+		else:
+			mouse_down = False
 
 		if event.type == pygame.USEREVENT+1:
-
+			None
 			if len(button_group) == 0:
 				new_button(buttons)
-			None
 			
 			
+		
 			
+	score_text_surface = score_text.render(f'{score}',False,(75,75,75))
+	score_text_rect = score_text_surface.get_rect(center = (screen_width / 2, screen_hight*0.1))
 			
 
 
