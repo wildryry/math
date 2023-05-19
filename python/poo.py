@@ -1,4 +1,4 @@
-from tkinter import CENTER
+
 import pygame 
 
 import sys
@@ -14,9 +14,12 @@ sky = pygame.image.load('images/sky.png')
 
 
 mouse_down = False 
+
+
 score = 0
 
 score_text = pygame.font.Font('fonts/data-latin.ttf',50)
+
 
 
 class Mouse(pygame.sprite.Sprite):
@@ -48,6 +51,7 @@ class Button(pygame.sprite.Sprite):
 
 	
 	def update(self):
+		global score
 		
 		self.rect.y += 0.05
 		self.time_left += randint(0,1)
@@ -56,11 +60,18 @@ class Button(pygame.sprite.Sprite):
 
 		if self.time_left >= self.time:
 			self.kill()
+
 			None
 		
 			
 		if	self.rect.collidepoint(pygame.mouse.get_pos()) and mouse_down:
 			self.kill()
+
+			new_boom = Boom(self.rect.x , self.rect.y , 30)
+
+			boom_group.add(new_boom)
+
+			score += 0.2
 			
 			None
 			
@@ -74,7 +85,30 @@ class Button(pygame.sprite.Sprite):
 		
 
 		
+class Boom(pygame.sprite.Sprite):
+	def __init__(self,x,y,time):
+		super().__init__()
+		self.image = pygame.image.load('images/caboom.png')
+		self.rect = self.image.get_rect(center = (x+44,y+17))
+		self.time = time
+		
+		
 
+
+	def update(self):
+		
+		
+		if self.time <= 0:
+			
+			self.kill()
+		else:
+			self.time += -1
+
+		None
+
+	def draw(self,surface):
+		surface.blit(self.image , self.rect)
+		None
 		
 
 screen_width = 600
@@ -82,6 +116,10 @@ screen_hight = 400
 
 
 screen = pygame.display.set_mode((screen_width,screen_hight))
+
+
+#boom
+boom_group = pygame.sprite.Group()
 
 
 #Button
@@ -117,8 +155,13 @@ pygame.time.set_timer(pygame.USEREVENT+1, 1)
 funny = 0
 
 def new_button(amount):
+	global score
 	
-	
+
+	time = 120 - score*0.5
+
+
+	print(time)
 
 	for i in range(amount):
 		
@@ -129,7 +172,7 @@ def new_button(amount):
 		if y <= 410 and y >= 0:
 			
 			
-			new_button = Button(75,x,y)
+			new_button = Button(time,x,y)
 			button_group.add(new_button)
 			all_sprites.add(new_button)
 
@@ -170,8 +213,11 @@ while not done:
 
 	screen.blit(sky,(0,0))
 	screen.blit(ground ,(0,360))
+	screen.blit(score_text_surface , score_text_rect)
 
 	button_group.update()
+
+	boom_group.update()
 	
 	
 
@@ -183,7 +229,12 @@ while not done:
 
 	mouse_group.update()
 
+
+
 	button_group.draw(screen)
+
+	boom_group.draw(screen)
+
 	mouse_group.draw(screen)
 	
 	
