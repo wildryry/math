@@ -52,6 +52,8 @@ class Button(pygame.sprite.Sprite):
 	
 	def update(self):
 		global score
+		global hits
+		global misses
 		
 		self.rect.y += 0.05
 		self.time_left += randint(0,1)
@@ -63,17 +65,22 @@ class Button(pygame.sprite.Sprite):
 
 			None
 		
-			
-		if	self.rect.collidepoint(pygame.mouse.get_pos()) and mouse_down:
-			self.kill()
+		if 	mouse_down:
+			if	self.rect.collidepoint(pygame.mouse.get_pos()):
+				self.kill()
 
-			new_boom = Boom(self.rect.x , self.rect.y , 30)
+				new_boom = Boom(self.rect.x , self.rect.y , 30)
 
-			boom_group.add(new_boom)
+				boom_group.add(new_boom)
 
-			score += 0.2
-			
-			None
+				score += 1
+
+				hits += 1
+				
+				None
+			elif len(pygame.sprite.spritecollide(mouse, button_group, False, collided = None)) == 0:
+				misses += 1
+
 			
 
 		
@@ -114,6 +121,9 @@ class Boom(pygame.sprite.Sprite):
 screen_width = 600
 screen_hight = 400
 
+hits = 0
+
+misses = 0
 
 screen = pygame.display.set_mode((screen_width,screen_hight))
 
@@ -158,10 +168,10 @@ def new_button(amount):
 	global score
 	
 
-	time = 120 - score*0.5
+	time = 100
 
 
-	print(time)
+	
 
 	for i in range(amount):
 		
@@ -200,11 +210,16 @@ while not done:
 			None
 			if len(button_group) == 0:
 				new_button(buttons)
-			
-			
 		
+	if misses != 0:
+		if hits % misses == 0:
+			hit_rate = hits / misses
+	else:
+		hit_rate = 1
+	if misses != 0:		
+		print(hits / misses)
 			
-	score_text_surface = score_text.render(f'{score}',False,(75,75,75))
+	score_text_surface = score_text.render(f'score:{score} hit rate:{hit_rate*100}%',False,(75,75,75))
 	score_text_rect = score_text_surface.get_rect(center = (screen_width / 2, screen_hight*0.1))
 			
 
