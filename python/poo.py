@@ -13,13 +13,15 @@ ground = pygame.image.load('images/ground.png')
 sky = pygame.image.load('images/sky.png')
 
 
+
+
 mouse_down = False 
 
 
-score = 0
 
-score_text = pygame.font.Font('fonts/data-latin.ttf',50)
 
+score_text = pygame.font.Font('fonts/data-latin.ttf',40)
+time_text = pygame.font.Font('fonts/data-latin.ttf',30)
 
 
 class Mouse(pygame.sprite.Sprite):
@@ -63,23 +65,24 @@ class Button(pygame.sprite.Sprite):
 		if self.time_left >= self.time:
 			self.kill()
 
+			misses += 1
+
 			None
 		
-		if 	mouse_down:
-			if	self.rect.collidepoint(pygame.mouse.get_pos()):
-				self.kill()
+		
+		if	self.rect.collidepoint(pygame.mouse.get_pos()) and mouse_down:
+			self.kill()
 
-				new_boom = Boom(self.rect.x , self.rect.y , 30)
+			new_boom = Boom(self.rect.x , self.rect.y , 30)
 
-				boom_group.add(new_boom)
+			boom_group.add(new_boom)
 
-				score += 1
+			score += 1
 
-				hits += 1
-				
-				None
-			elif len(pygame.sprite.spritecollide(mouse, button_group, False, collided = None)) == 0:
-				misses += 1
+			hits += 1
+			
+			None
+			
 
 			
 
@@ -121,12 +124,22 @@ class Boom(pygame.sprite.Sprite):
 screen_width = 600
 screen_hight = 400
 
+score = 0
+
+seconds = 60
+
+time = seconds*60
+
 hits = 0
 
 misses = 0
 
+hit_rate = 0
+
 screen = pygame.display.set_mode((screen_width,screen_hight))
 
+end_backround_surface = pygame.image.load('images/backround.png')
+end_backround_rect = end_backround_surface.get_rect(center = (screen_width*.5,screen_hight*0.5))
 
 #boom
 boom_group = pygame.sprite.Group()
@@ -175,9 +188,9 @@ def new_button(amount):
 
 	for i in range(amount):
 		
-		y = randint(30,screen_hight-30)
+		y = randint(70,screen_hight-30)
 
-		x = randint(50,screen_width-50) 
+		x = randint(70,screen_width-50) 
 		
 		if y <= 410 and y >= 0:
 			
@@ -193,15 +206,23 @@ new_button(buttons)
 
 while not done:
 
+	mouse_group.update()
+
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			done = True
+			#pygame.quit()
+			#sys.exit()	
 
 		if event.type == pygame.KEYDOWN:
 			
 			print(pygame.key.get_pressed())
 	
 		if event.type == pygame.MOUSEBUTTONDOWN:
+
+			if len(pygame.sprite.spritecollide(mouse, button_group, False, collided = None)) == 0:
+				misses += 1
+
 			mouse_down = True
 		else:
 			mouse_down = False
@@ -210,25 +231,45 @@ while not done:
 			None
 			if len(button_group) == 0:
 				new_button(buttons)
+
+	#time counting down
+
+	time += -1
+
+	seconds = round(time/60)
+
+	if time <= 0:
+		done = True
+	
+
+
+	#accuracy logic
 		
 	if misses != 0:
-		if hits % misses == 0:
-			hit_rate = hits / misses
+		
+		hit_rate = hits / (hits + misses)
+
+	elif hit_rate > 1:
+		hit_rate = 1
+
 	else:
 		hit_rate = 1
-	if misses != 0:		
-		print(hits / misses)
+	
 			
-	score_text_surface = score_text.render(f'score:{score} hit rate:{hit_rate*100}%',False,(75,75,75))
-	score_text_rect = score_text_surface.get_rect(center = (screen_width / 2, screen_hight*0.1))
+		
 			
-
+	score_text_surface = score_text.render(f'score:{round(score*hit_rate)} hit rate:{round(hit_rate*100)}%',False,(75,75,75))
+	score_text_rect = score_text_surface.get_rect(center = (screen_width / 2, screen_hight*0.05))
+			
+	time_text_surface = time_text.render(f'time:{seconds}', False, (75,75,75))
+	time_text_rect = time_text_surface.get_rect(topleft = (screen_width*0.01,screen_hight*0.13))
 
 	
 
 	screen.blit(sky,(0,0))
 	screen.blit(ground ,(0,360))
 	screen.blit(score_text_surface , score_text_rect)
+	screen.blit(time_text_surface,time_text_rect)
 
 	button_group.update()
 
@@ -242,7 +283,7 @@ while not done:
 	
 
 
-	mouse_group.update()
+	
 
 
 
@@ -256,6 +297,48 @@ while not done:
 	
 	pygame.display.update()
 	clock.tick(60)
+
+
+done = False
+
+score_text = pygame.font.Font('fonts/data-latin.ttf',21)
+
+final_score_text = pygame.font.Font('fonts/data-latin.ttf',23)
+
+tortus_surface = pygame.image.load('images/boogie_tortus_transparent.png')
+tortus_rect = tortus_surface.get_rect(center = (screen_width * 0.45 , screen_hight * 0.47))
+
+
+
+while not done:
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			done = True
+
+
+	mouse_group.update()
+
+	final_score_text_surface = final_score_text.render(f'your final score is :{round(score*hit_rate)}',False , (75,75,75))
+	final_score_text_rect = final_score_text_surface.get_rect(center = (screen_width*0.46 , screen_hight*0.56))
+
+	score_text_surface = score_text.render(f'total hits:{hits}  rate:{round(hit_rate*100)}%',False,(75,75,75))
+	score_text_rect = score_text_surface.get_rect(center = (screen_width * 0.46, screen_hight * 0.38))
+
+
+
+	screen.blit(end_backround_surface,end_backround_rect)
+
+	screen.blit(score_text_surface,score_text_rect)
+
+	screen.blit(final_score_text_surface , final_score_text_rect)
+
+	screen.blit(tortus_surface,tortus_rect)
+	
+	mouse_group.draw(screen)
+	
+	pygame.display.update()
+	clock.tick(60)
+
 
 
 pygame.quit()
