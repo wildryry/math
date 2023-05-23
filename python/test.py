@@ -4,20 +4,12 @@ import pygame
 
 import sys
 
-screen_width = 1700
-screen_hight = 700
-
-clock = pygame.time.Clock()
-
-screen = pygame.display.set_mode((screen_width,screen_hight)) 
-
-done = False
 
 class Arrow(pygame.sprite.Sprite):    
     def __init__(self,x,y):
-        super.__init__()
-        self.surface = pygame.image.load('images/arrow.png')
-        self.rect = self.surface.get_rect(center = (x,y))
+        super().__init__()
+        self.image = pygame.image.load('images/arrow.png')
+        self.rect = self.image.get_rect(center = (x,y))
         self.rect.x = x
         self.rect.y = y
         None
@@ -28,11 +20,25 @@ class Arrow(pygame.sprite.Sprite):
     def draw(self,surface):
         surface.blit(self.surface , self.rect)
 
-new_arrow = Arrow(400,300)
+
 arrow_group = pygame.sprite.Group()
-arrow_group.add(new_arrow)
+
+screen_width = 1700
+screen_hight = 700
+
+clock = pygame.time.Clock()
+
+screen = pygame.display.set_mode((screen_width,screen_hight)) 
+
+done = False
 
 
+def add_arrow(amount):
+    
+    for i in range(amount):
+        new_arrow = Arrow(300, 400 + ((i-1)*-25))
+        arrow_group.add(new_arrow)
+        None
 
 while not done:
 
@@ -41,7 +47,13 @@ while not done:
             done = True
 
 
-    arrow_group.draw
+    screen.fill((3, 77, 61))
+    arrow_group.draw(screen)
+
+    add_arrow(1)
+
+
+    
 
     pygame.display.flip()
     clock.tick(60)
