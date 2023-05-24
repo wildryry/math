@@ -23,16 +23,28 @@ class Player(pygame.sprite.Sprite):
 
 
 class Arrow(pygame.sprite.Sprite):    
-    def __init__(self,x,y):
+    def __init__(self,x,y,speed,rotation):
         super().__init__()
         self.image = pygame.image.load('images/arrow.png')
+        self.image = pygame.transform.rotate(self.image, rotation)
         self.rect = self.image.get_rect(center = (x,y))
         self.rect.x = x
         self.rect.y = y
+        self.speed = speed
+        self.rotation = rotation
         None
 
     def update(self):
-        None
+        if self.speed > 0 :
+            
+            self.rect.x += self.speed
+        else:
+            self.rect.x += self.speed
+        
+        if self.rect.x > screen_width or self.rect.y > screen_hight:
+            self.kill()
+        elif self.rect.x < 0 or self.rect.y < 0:
+            self.kill()
 
     def draw(self,surface):
         surface.blit(self.surface , self.rect)
@@ -53,11 +65,20 @@ screen = pygame.display.set_mode((screen_width,screen_hight))
 
 done = False
 
+def shoot_arrow(speed):
+    #add_arrow(1,pygame.mouse.get_pos())
+    None
 
-def add_arrow(amount , x , y):
+
+def add_arrow(amount , x , y , speed):
+
+    if speed > 0:
+        rotation = 180
+    else:
+        rotation = 0
     
     for i in range(amount):
-        new_arrow = Arrow(x, y + ((i-1)*-25))
+        new_arrow = Arrow(x, y + (i-1)*-25,speed , rotation)
         arrow_group.add(new_arrow)
         all_sprites.add(new_arrow)
         None
@@ -69,7 +90,10 @@ def add_player(amount , x , y):
         all_sprites.add(new_player)
         None
 add_player(1, 500, 100)
-add_arrow(1,300,100)
+add_arrow(1,300,100,4)
+
+
+funny = 5
 
 while not done:
 
@@ -78,8 +102,8 @@ while not done:
             done = True
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
-                print('pog')
-            None
+                wkey = True
+                None
 
 
     screen.fill((3, 77, 61))
@@ -87,8 +111,7 @@ while not done:
     player_group.draw(screen)
     
 
-    
-
+    arrow_group.update()
 
     
 
