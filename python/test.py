@@ -8,7 +8,7 @@ import sys
 class Player(pygame.sprite.Sprite):
     def __init__(self,x,y):
         super().__init__()
-        self.image = pygame.image.load('images/stick_man.png')
+        self.image = pygame.image.load('images/tank_sprite.png')
         self.rect = self.image.get_rect(center = (x,y))
         self.rect.x = x
         self.rect.y = y
