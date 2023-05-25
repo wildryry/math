@@ -49,10 +49,10 @@ class Arrow(pygame.sprite.Sprite):
         if self.speedx > 0 :
             
             self.rect.x += self.speedx
-            self.rotation = (ma.degrees(ma.atan(self.speedy / self.speedx)) + 180)
+            self.rotation = (ma.degrees(ma.atan(-self.speedy / self.speedx)) + 180)
         else:
             self.rect.x += self.speedx
-            self.rotation = ma.degrees(ma.atan(self.speedy / self.speedx))
+            self.rotation = ma.degrees(ma.atan(-self.speedy / self.speedx))
 
         self.image = pygame.transform.rotate(self.orginal_image, self.rotation)
         
