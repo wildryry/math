@@ -46,11 +46,11 @@ class Arrow(pygame.sprite.Sprite):
         self.speedy += gravity*0.1
         self.rect.y += self.speedy 
         
-        if self.speedx > 0 :
+        if self.speedx > 0 and self.speedx != 0:
             
             
             self.rotation = (ma.degrees(ma.atan(-self.speedy / self.speedx)) + 180)
-        else:
+        elif self.speedx < 0 and self.speedx != 0:
             
             self.rotation = ma.degrees(ma.atan(-self.speedy / self.speedx))
 
@@ -97,19 +97,27 @@ screen = pygame.display.set_mode((screen_width,screen_hight))
 
 done = False
 
-def shoot_arrow(speed,dir):
+def shoot_arrow(speedorg):
     for sprite in player_group:
+
+        if (sprite.rect.x - mouse_x) != 0:
+            dir = ma.degrees(ma.atan((sprite.rect.y - mouse_y) / (sprite.rect.x - mouse_x)))
+        else:
+            dir = 0
+        print(dir)
+        speed = (sprite.rect.x - mouse_x) / (ma.sin(dir)*speedorg +1)
+        
         add_arrow(1 , sprite.rect.x + 10 , sprite.rect.y - 20 , speed , dir) 
    
         
 
 
-def add_arrow(amount , x , y , xspeed ,dir):
+def add_arrow(amount , x , y , speed ,dir):
 
-    yspeed = ma.tan(dir)#/xspeed
-    xspeed = xspeed - yspeed
+    xspeed = (ma.cos(dir))*speed
+    yspeed = (ma.sin(dir))*speed
 
-
+    
     if xspeed > 0:
         rotation = 180
     else:
@@ -130,7 +138,7 @@ def add_player(amount , x , y):
         all_sprites.add(new_player)
         None
 add_player(1, 500, 100)
-add_player(1, 500, 250)
+#add_player(1, 500, 250)
 
 
 
@@ -148,18 +156,18 @@ while not done:
 
             if event.key == pygame.K_w:
                 wkey = True
-                shoot_arrow(-15,0)
+                shoot_arrow(10)
                 None
             
             if event.key == pygame.K_s:
                 skey = True
-                shoot_arrow(15,0)
+                shoot_arrow(10)
                 None
 
             if event.key == pygame.K_SPACE:
                 spaceKey = True
-                for sprite in player_group:
-                    shoot_arrow(-15,ma.degrees(ma.atan((sprite.rect.y - mouse_y) / (sprite.rect.x - mouse_x))))
+                
+                shoot_arrow(10)
                 
 
             if event.key == pygame.K_a:
@@ -175,7 +183,7 @@ while not done:
                     sprite.rect.x += sprite.image.get_width()
                 None
             
-                
+
         else:
             skey = False
             dkey = False
@@ -183,7 +191,7 @@ while not done:
             wkey = False
             spacekey = False
 
-
+    
     
 
     screen.fill((3, 77, 61))
