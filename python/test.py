@@ -48,12 +48,13 @@ class Arrow(pygame.sprite.Sprite):
         
         if self.speedx > 0 :
             
-            self.rect.x += self.speedx
+            
             self.rotation = (ma.degrees(ma.atan(-self.speedy / self.speedx)) + 180)
         else:
-            self.rect.x += self.speedx
+            
             self.rotation = ma.degrees(ma.atan(-self.speedy / self.speedx))
 
+        self.rect.x += self.speedx
         self.image = pygame.transform.rotate(self.orginal_image, self.rotation)
         
         
@@ -63,8 +64,7 @@ class Arrow(pygame.sprite.Sprite):
         elif self.rect.x < -75 or self.rect.y < -75:
             self.kill()
 
-        self.speedy += gravity*0.1
-        self.rect.y += self.speedy 
+        
 
         
 
@@ -82,6 +82,10 @@ screen_width = 1000
 screen_hight = 412
 
 gravity = 0.5
+
+mouse_x = 0
+
+mouse_y = 0
 
 akey = False
 
@@ -102,7 +106,9 @@ def shoot_arrow(speed,dir):
 
 def add_arrow(amount , x , y , xspeed ,dir):
 
-    yspeed = (ma.tan(dir)*xspeed)
+    yspeed = ma.tan(dir)#/xspeed
+    xspeed = xspeed - yspeed
+
 
     if xspeed > 0:
         rotation = 180
@@ -131,7 +137,7 @@ add_player(1, 500, 250)
 funny = 5
 
 while not done:
-
+    mouse_x,mouse_y = pygame.mouse.get_pos()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -142,17 +148,18 @@ while not done:
 
             if event.key == pygame.K_w:
                 wkey = True
-                shoot_arrow(-15,1)
+                shoot_arrow(-15,0)
                 None
             
             if event.key == pygame.K_s:
                 skey = True
-                shoot_arrow(15,1)
+                shoot_arrow(15,0)
                 None
 
             if event.key == pygame.K_SPACE:
                 spaceKey = True
-                shoot_arrow(15,90)
+                for sprite in player_group:
+                    shoot_arrow(-15,ma.degrees(ma.atan((sprite.rect.y - mouse_y) / (sprite.rect.x - mouse_x))))
                 
 
             if event.key == pygame.K_a:
@@ -167,8 +174,6 @@ while not done:
                 for sprite in player_group:
                     sprite.rect.x += sprite.image.get_width()
                 None
-            
-            
             
                 
         else:
