@@ -25,39 +25,49 @@ class Player(pygame.sprite.Sprite):
 
 
 class Arrow(pygame.sprite.Sprite):    
-    def __init__(self, x , y , xspeed ,yspeed, rotation):
+    def __init__(self, pos , speed, dir):
         super().__init__()
+        # what this does is -> cos^-1 (dir.x/1) = Ɵ
+        rotation = ma.degrees(ma.acos(dir.x))
         self.orginal_image = pygame.image.load('images/arrow.png')
         self.image = pygame.transform.rotate(self.orginal_image, rotation)
-        self.rect = self.image.get_rect(center = (x,y))
+        self.rect = self.image.get_rect(center = pos)
 
-        self.rect.x = x
-        self.rect.y = y
-        
-        self.speedx = xspeed
-        self.speedy = yspeed
-        
+        self.dir = dir
+        self.speed = speed
+        self.pos = pos
         
         self.rotation = rotation
         None
 
     def update(self):
 
-        self.speedy += gravity*0.1
-        self.rect.y += self.speedy 
-        
-        if self.speedx > 0 and self.speedx != 0:
+        #self.speed += gravity
+        if self.speed.x != 0:
+            if self.speed.x > 0 and self.speed.y > 0:
             
-            
-            self.rotation = (ma.degrees(ma.atan(-self.speedy / self.speedx)) + 180)
-        elif self.speedx < 0 and self.speedx != 0:
-            
-            self.rotation = ma.degrees(ma.atan(-self.speedy / self.speedx))
+                self.rotation = (ma.degrees(ma.acos(self.dir.x)) + 180)
 
-        self.rect.x += self.speedx
+
+            elif self.speed.x < 0 and self.speed.y > 0:
+                
+                self.rotation = ma.degrees(ma.acos(self.dir.x))
+
+            elif self.speed.x > 0 and self.speed.y < 0:
+
+                self.rotation = - ma.degrees(ma.acos(self.dir.x) + 360)
+
+            elif self.speed.x < 0 and self.speed.y < 0:
+
+                self.rotation = ma.degrees(ma.acos(-self.dir.x) + 180)
+                print('gah')
+
+
         self.image = pygame.transform.rotate(self.orginal_image, self.rotation)
         
         
+        self.rect.x += (self.dir.x * self.speed.x)
+        self.rect.y += (self.dir.y * self.speed.y)
         
         if self.rect.x > screen_width or self.rect.y > screen_hight:
             self.kill()
@@ -81,7 +91,7 @@ player_group = pygame.sprite.Group()
 screen_width = 1000
 screen_hight = 412
 
-gravity = 0.5
+gravity = pygame.math.Vector2(0,-0.5)
 
 mouse_x = 0
 
@@ -97,39 +107,56 @@ screen = pygame.display.set_mode((screen_width,screen_hight))
 
 done = False
 
+def diff(num1, num2):
+    if num1 == num2:
+        return 1
+        None
+    elif num1 > num2:
+        return num1 - num2
+        None
+    else:
+        return num2 - num1
+        None
+
+
+
 def shoot_arrow(speedorg):
+    
     for sprite in player_group:
 
-        if (sprite.rect.x - mouse_x) != 0:
-            dir = ma.degrees(ma.atan((sprite.rect.y - mouse_y) / (sprite.rect.x - mouse_x)))
-        else:
-            dir = 0
-        print(dir)
-        speed = (sprite.rect.x - mouse_x) / (ma.sin(dir)*speedorg +1)
+        player_vector = pygame.math.Vector2(sprite.rect.center)
+        arrow_pos = pygame.math.Vector2(sprite.rect.center)
+
+        mouse_vector = pygame.math.Vector2((mouse_x,mouse_y))
+
+        dir = mouse_vector - player_vector
+        dir = dir.normalize()
+
         
-        add_arrow(1 , sprite.rect.x + 10 , sprite.rect.y - 20 , speed , dir) 
+        new_vector = pygame.math.Vector2(10,-20)
+        arrow_pos += new_vector
+
+
+        speed = pygame.math.Vector2(speedorg)
+        
+        add_arrow(arrow_pos , speed , dir) 
+        
    
         
 
 
-def add_arrow(amount , x , y , speed ,dir):
-
-    xspeed = (ma.cos(dir))*speed
-    yspeed = (ma.sin(dir))*speed
+def add_arrow(arrow_pos , speed ,dir):
 
     
-    if xspeed > 0:
-        rotation = 180
-    else:
-        rotation = 0
 
     
     
-    for i in range(amount):
-        new_arrow = Arrow(x, y + (i-1)*-25 , xspeed , yspeed , rotation)
-        arrow_group.add(new_arrow)
-        all_sprites.add(new_arrow)
-        None
+    
+    new_arrow = Arrow(arrow_pos, speed , dir)
+    arrow_group.add(new_arrow)
+    all_sprites.add(new_arrow)
+        
+    None
 def add_player(amount , x , y):
 
     for i in range(amount):
