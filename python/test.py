@@ -42,28 +42,22 @@ class Arrow(pygame.sprite.Sprite):
 
     def update(self):
 
-        #self.speed += gravity
-        if self.speed.x != 0:
-            if self.speed.x > 0 and self.speed.y > 0:
-            
-                self.rotation = (ma.degrees(ma.acos(self.dir.x)) + 180)
+        
+        
+        if self.dir.y < 0 or self.dir.y == 0:
+        
+            self.rotation = (ma.degrees(ma.acos(self.dir.x)) + 180)
+            self.speed.y -= gravity
 
+        elif self.dir.y > 0 :
 
-            elif self.speed.x < 0 and self.speed.y > 0:
-                
-                self.rotation = ma.degrees(ma.acos(self.dir.x))
-
-            elif self.speed.x > 0 and self.speed.y < 0:
-
-                self.rotation = - ma.degrees(ma.acos(self.dir.x) + 360)
-
-            elif self.speed.x < 0 and self.speed.y < 0:
-
-                self.rotation = ma.degrees(ma.acos(-self.dir.x) + 180)
-                print('gah')
+            self.rotation = ma.degrees(ma.acos(-self.dir.x))
+            self.speed.y += gravity 
 
 
         self.image = pygame.transform.rotate(self.orginal_image, self.rotation)
+        
+        
         
         
         self.rect.x += (self.dir.x * self.speed.x)
@@ -91,7 +85,7 @@ player_group = pygame.sprite.Group()
 screen_width = 1000
 screen_hight = 412
 
-gravity = pygame.math.Vector2(0,-0.5)
+gravity = 0.5 #pygame.math.Vector2(0,0.5)
 
 mouse_x = 0
 
@@ -232,5 +226,6 @@ while not done:
 
     pygame.display.flip()
     clock.tick(60)
-
+pygame.quit()
+sys.exit()
 
