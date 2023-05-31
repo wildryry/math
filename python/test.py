@@ -49,12 +49,13 @@ class Arrow(pygame.sprite.Sprite):
             self.rotation = (ma.degrees(ma.acos(self.dir.x)) + 180)
             self.speed -= gravity
 
-            print(self.dir)
+            
         else:
 
             self.rotation = ma.degrees(ma.acos(-self.dir.x))
             self.speed += gravity 
 
+        print(self.rotation, ma.degrees(self.dir.x))
 
 
         self.image = pygame.transform.rotate(self.orginal_image, self.rotation)
