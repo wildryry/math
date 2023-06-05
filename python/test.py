@@ -43,23 +43,24 @@ class Arrow(pygame.sprite.Sprite):
     def update(self):
 
         
-        
+        print(self.dir.y)
         if self.dir.y < 0 or self.dir.y == 0:
-        
-            self.rotation = (ma.degrees(ma.acos(self.dir.x)) + 180)
-            self.speed -= gravity
-
+            if self.dir.y != 0 and self.dir.y % 360 != 0:
+                self.rotation = (ma.degrees(ma.acos(self.dir.y)) + 180)
+                self.speed -= gravity
+                self.dir -= gravity
             
         else:
+            if self.dir.y != 0 and self.dir.y % 360 != 0:
+                self.rotation = ma.degrees(ma.acos(-self.dir.y))
+                self.speed += gravity
+                self.dir += gravity 
 
-            self.rotation = ma.degrees(ma.acos(-self.dir.x))
-            self.speed += gravity 
-
-        print(self.rotation, ma.degrees(self.dir.x))
-
+        #print(self.rotation, ma.degrees(self.dir.x))
+        
 
         self.image = pygame.transform.rotate(self.orginal_image, self.rotation)
-
+        print(self.speed.y)
         
         self.speed += pygame.math.Vector2(0,0)        
         
@@ -94,6 +95,8 @@ gravity = pygame.math.Vector2(0,0.5)
 mouse_x = 0
 
 mouse_y = 0
+
+mouse_down = False
 
 akey = False
 
@@ -170,29 +173,44 @@ add_player(1, 500, 100)
 funny = 5
 
 while not done:
+    
     mouse_x,mouse_y = pygame.mouse.get_pos()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
 
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            click = pygame.mouse.get_pressed()
+            if click[0] == True:
+                mouse_down = True
+                shoot_arrow(10)
+            else:
+                mouse_down = False
+
+
+            
+
+        else: mouse_down = False
+
+
 
         if event.type == pygame.KEYDOWN:
 
             if event.key == pygame.K_w:
                 wkey = True
-                shoot_arrow(10)
+                
                 None
             
             if event.key == pygame.K_s:
                 skey = True
-                shoot_arrow(10)
+                
                 None
 
             if event.key == pygame.K_SPACE:
                 spaceKey = True
                 
-                shoot_arrow(10)
+                
                 
 
             if event.key == pygame.K_a:
