@@ -27,7 +27,11 @@ bage = pygame.image.load('graphics/objects/certified_goober.jpg').convert_alpha(
 bage_rect = bage.get_rect(center = (0,100))
 bage_speed = 3
 
+funny = 0
+
 clicks = 0
+
+mouse_down = False
 
 while True:
     for event in pygame.event.get():
@@ -36,16 +40,28 @@ while True:
                 pygame.quit()
                 exit()
 
-            if event.type == pygame.MOUSEBUTTONUP and pygame.mixer.music.get_busy() == False:
-                
+            if event.type == pygame.MOUSEBUTTONDOWN and pygame.mixer.music.get_busy() == False:
+                mouse_down = True
+                click = pygame.mouse.get_pressed()
+                if click[0]:
                     clicks += 1
-                    
+                    funny +=  1
+            else: 
+                mouse_down = False
 
-    if bage_rect.right > 500:
-        bage_speed = -6.5
+
+    if funny >= 0.05 and mouse_down == False: 
+        funny -= 0.08
+        
     
-    if bage_rect.left < 0: 
-        bage_speed = 6.5
+
+    if bage_rect.right > 450:
+        bage_rect.right = 450
+        bage_speed = -6.5 - funny 
+    
+    if bage_rect.left < 50: 
+        bage_rect.left = 50
+        bage_speed = 6.5 + funny 
     
     if bage_speed < 0:
         bage_speed += .05
@@ -63,6 +79,7 @@ while True:
 
     
     bage_rect.x += bage_speed    
+    
     
 
     pygame.display.update()
