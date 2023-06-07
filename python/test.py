@@ -37,24 +37,28 @@ class Arrow(pygame.sprite.Sprite):
         self.speed = speed
         self.pos = pos
         
-        self.rotation = rotation
+        self.rotation = rotation 
         None
 
     def update(self):
 
         
-        print(self.dir.y)
-        if self.dir.y < 0 or self.dir.y == 0:
+        print(self.dir.y) 
+        '''
+        if self.dir.y < 0 or self.dir.y != 0:
             if self.dir.y != 0 and self.dir.y % 360 != 0:
                 self.rotation = (ma.degrees(ma.acos(self.dir.y)) + 180)
                 self.speed -= gravity
                 self.dir -= gravity
             
-        else:
+        
+        
             if self.dir.y != 0 and self.dir.y % 360 != 0:
                 self.rotation = ma.degrees(ma.acos(-self.dir.y))
                 self.speed += gravity
                 self.dir += gravity 
+        '''
+
 
         #print(self.rotation, ma.degrees(self.dir.x))
         
@@ -68,9 +72,9 @@ class Arrow(pygame.sprite.Sprite):
         self.rect.x += (self.dir.x * self.speed.x)
         self.rect.y += (self.dir.y * (self.speed.y + 5))
         
-        if self.rect.x > screen_width or self.rect.y > screen_hight:
+        if self.rect.x > screen_width + 200 or self.rect.y > screen_hight + 200:
             self.kill()
-        elif self.rect.x < -75 or self.rect.y < -75:
+        elif self.rect.x < -200 or self.rect.y < -200:
             self.kill()
 
         

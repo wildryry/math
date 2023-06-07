@@ -45,22 +45,27 @@ while True:
                 click = pygame.mouse.get_pressed()
                 if click[0]:
                     clicks += 1
-                    funny +=  1
+                    funny += 1
+                    None
             else: 
                 mouse_down = False
-
+    
+    
 
     if funny >= 0.05 and mouse_down == False: 
         funny -= 0.08
+        None
         
-    
+    if funny > 100:
+        funny = 100
 
-    if bage_rect.right > 450:
-        bage_rect.right = 450
+
+    if bage_rect.right > 500:
+        bage_rect.right = 500
         bage_speed = -6.5 - funny 
     
-    if bage_rect.left < 50: 
-        bage_rect.left = 50
+    if bage_rect.left < 0: 
+        bage_rect.left = 0
         bage_speed = 6.5 + funny 
     
     if bage_speed < 0:
