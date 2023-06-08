@@ -33,7 +33,7 @@ class Arrow(pygame.sprite.Sprite):
         self.image = pygame.transform.rotate(self.orginal_image, rotation)
         self.rect = self.image.get_rect(center = pos)
 
-        print(dir , speed)
+        
 
         self.dir = dir
         self.speed = speed
@@ -45,30 +45,30 @@ class Arrow(pygame.sprite.Sprite):
 
     def update(self,delta_time):
 
+        print(self.dir)
         
-    
 
         self.vol = self.vol + gravity * delta_time/1000
 
         self.pos += self.vol * delta_time/1000
 
-
+        vector = self.vol.normalize()
         #'''
         if self.dir.y < 0 and self.dir.x < 0:
             
-            self.rotation = ma.degrees(ma.acos(self.dir.x) + 180)
-
+            self.rotation = ma.degrees(ma.acos(vector.x) )+ 180
+            
             None
-                
+        elif self.dir.y > 0 and self.dir.x > 0:     
         #'''
-
+            self.rotation = ma.degrees(ma.acos(vector.y) )+ 90
 
         #print(self.rotation, ma.degrees(self.dir.x))
         
 
         self.image = pygame.transform.rotate(self.orginal_image, self.rotation)
         
-        
+
         
         
         
@@ -193,7 +193,7 @@ while not done:
             click = pygame.mouse.get_pressed()
             if click[0] == True:
                 mouse_down = True
-                shoot_arrow(500)
+                shoot_arrow(400)
             else:
                 mouse_down = False
 
