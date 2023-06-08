@@ -6,17 +6,48 @@ import sys
 
 import math as ma
 
-
-class Player(pygame.sprite.Sprite):
+class Level_piece(pygame.sprite.Sprite):
     def __init__(self,x,y):
         super().__init__()
-        self.image = pygame.image.load('images/tank_sprite.png')
+        self.image = pygame.image.load('images/platform.png')
         self.rect = self.image.get_rect(center = (x,y))
         self.rect.x = x
         self.rect.y = y
 
     def update(self):
 
+        None
+
+    def draw(self, surface):
+        surface.blit(self.image , self.rect)
+        print('fdsad')
+        None
+
+
+class Player(pygame.sprite.Sprite):
+    def __init__(self,x,y):
+        super().__init__()
+        self.image = pygame.image.load('images/tank_sprite.png')
+        self.rect = self.image.get_rect(center = (x,y))
+
+        self.pos = pygame.math.Vector2(x,y)
+
+        self.vol = pygame.math.Vector2(0,0)
+
+        self.rect.x = x
+        self.rect.y = y
+
+    def update(self,delta_time):
+
+        self.vol = self.vol + gravity * delta_time/1000
+
+        self.pos += self.vol * delta_time/1000
+
+        
+
+        
+        self.rect.x = self.pos.x
+        self.rect.y = self.pos.y
         None
 
     def draw(self, surface):
@@ -45,7 +76,7 @@ class Arrow(pygame.sprite.Sprite):
 
     def update(self,delta_time):
 
-        print(self.dir)
+        
         
 
         self.vol = self.vol + gravity * delta_time/1000
@@ -55,13 +86,32 @@ class Arrow(pygame.sprite.Sprite):
         vector = self.vol.normalize()
         #'''
         if self.dir.y < 0 and self.dir.x < 0:
-            
-            self.rotation = ma.degrees(ma.acos(vector.x) )+ 180
-            
-            None
+            if vector.y < 0:
+                self.rotation = ma.degrees(ma.acos(vector.x) )+ 180
+                None
+            else:
+                self.rotation = ma.degrees(ma.asin(vector.y) ) + 0
+                None
+
         elif self.dir.y > 0 and self.dir.x > 0:     
-        #'''
             self.rotation = ma.degrees(ma.acos(vector.y) )+ 90
+            None
+
+        elif self.dir.y < 0 and self.dir.x > 0:
+            if vector.y < 0:
+                self.rotation = ma.degrees(ma.acos(vector.x) )+ 180
+                None
+            else:
+                self.rotation = ma.degrees(ma.acos(vector.y) )+ 90
+                None
+
+        elif self.dir.y > 0 and self.dir.x < 0:     
+            self.rotation = ma.degrees(ma.asin(vector.y) ) + 0
+            None
+
+
+
+        #'''
 
         #print(self.rotation, ma.degrees(self.dir.x))
         
@@ -94,6 +144,8 @@ arrow_group = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 
 player_group = pygame.sprite.Group()
+
+Level_group =  pygame.sprite.Group()
 
 screen_width = 1000
 screen_hight = 412
@@ -128,7 +180,13 @@ def diff(num1, num2):
         return num2 - num1
         None
 
+def add_level_piece(x_pos,y_pos):
+    
+    new_Level_piece = Level_piece(x_pos, y_pos)
+    Level_group.add(new_Level_piece)
+    all_sprites.add(new_Level_piece)    
 
+    None
 
 def shoot_arrow(speedorg):
     
@@ -147,7 +205,7 @@ def shoot_arrow(speedorg):
         arrow_pos += new_vector
 
 
-        speed = speedorg
+        speed = speedorg * 10
         
         add_arrow(arrow_pos , speed , dir) 
         
@@ -174,9 +232,11 @@ def add_player(amount , x , y):
         player_group.add(new_player)
         all_sprites.add(new_player)
         None
-add_player(1, 500, 100)
-#add_player(1, 500, 250)
 
+
+add_player(1, 500, 100)
+
+add_level_piece(0,0)
 
 
 funny = 5
@@ -193,7 +253,7 @@ while not done:
             click = pygame.mouse.get_pressed()
             if click[0] == True:
                 mouse_down = True
-                shoot_arrow(400)
+                shoot_arrow(75)
             else:
                 mouse_down = False
 
@@ -243,15 +303,18 @@ while not done:
             wkey = False
             spacekey = False
 
-    
+    player_group.update(clock.get_time())
+
+    arrow_group.update(clock.get_time())
     
 
     screen.fill((3, 77, 61))
+    Level_group.draw(screen)
     arrow_group.draw(screen)
     player_group.draw(screen)
     
 
-    arrow_group.update(clock.get_time())
+    
     
     
 
