@@ -39,11 +39,12 @@ class Player(pygame.sprite.Sprite):
 
     def update(self,delta_time):
 
+        
         self.vol = self.vol + gravity * delta_time/1000
 
         self.pos += self.vol * delta_time/1000
 
-        
+
 
         
         self.rect.x = self.pos.x
