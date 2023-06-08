@@ -33,44 +33,48 @@ class Arrow(pygame.sprite.Sprite):
         self.image = pygame.transform.rotate(self.orginal_image, rotation)
         self.rect = self.image.get_rect(center = pos)
 
+        print(dir , speed)
+
         self.dir = dir
         self.speed = speed
+        self.vol = speed * dir 
         self.pos = pos
         
-        self.rotation = rotation 
+        self.rotation = 0#rotation 
         None
 
-    def update(self):
+    def update(self,delta_time):
 
         
-        print(self.dir.y) 
-        '''
-        if self.dir.y < 0 or self.dir.y != 0:
-            if self.dir.y != 0 and self.dir.y % 360 != 0:
-                self.rotation = (ma.degrees(ma.acos(self.dir.y)) + 180)
-                self.speed -= gravity
-                self.dir -= gravity
+    
+
+        self.vol = self.vol + gravity * delta_time/1000
+
+        self.pos += self.vol * delta_time/1000
+
+
+        #'''
+        if self.dir.y < 0 and self.dir.x < 0:
             
-        
-        
-            if self.dir.y != 0 and self.dir.y % 360 != 0:
-                self.rotation = ma.degrees(ma.acos(-self.dir.y))
-                self.speed += gravity
-                self.dir += gravity 
-        '''
+            self.rotation = ma.degrees(ma.acos(self.dir.x) + 180)
+
+            None
+                
+        #'''
 
 
         #print(self.rotation, ma.degrees(self.dir.x))
         
 
         self.image = pygame.transform.rotate(self.orginal_image, self.rotation)
-        print(self.speed.y)
-        
-        self.speed += pygame.math.Vector2(0,0)        
         
         
-        self.rect.x += (self.dir.x * self.speed.x)
-        self.rect.y += (self.dir.y * (self.speed.y + 5))
+        
+        
+        
+        
+        self.rect.x = self.pos.x
+        self.rect.y = self.pos.y
         
         if self.rect.x > screen_width + 200 or self.rect.y > screen_hight + 200:
             self.kill()
@@ -82,7 +86,7 @@ class Arrow(pygame.sprite.Sprite):
         
 
     def draw(self,surface):
-        surface.blit(self.surface , self.rect)
+        surface.blit(self.image , self.rect)
 
 
 arrow_group = pygame.sprite.Group()
@@ -94,7 +98,8 @@ player_group = pygame.sprite.Group()
 screen_width = 1000
 screen_hight = 412
 
-gravity = pygame.math.Vector2(0,0.5)
+
+gravity = pygame.math.Vector2(0,450)
 
 mouse_x = 0
 
@@ -142,7 +147,7 @@ def shoot_arrow(speedorg):
         arrow_pos += new_vector
 
 
-        speed = pygame.math.Vector2(speedorg)
+        speed = speedorg
         
         add_arrow(arrow_pos , speed , dir) 
         
@@ -188,7 +193,7 @@ while not done:
             click = pygame.mouse.get_pressed()
             if click[0] == True:
                 mouse_down = True
-                shoot_arrow(10)
+                shoot_arrow(500)
             else:
                 mouse_down = False
 
@@ -246,8 +251,8 @@ while not done:
     player_group.draw(screen)
     
 
-    arrow_group.update()
-
+    arrow_group.update(clock.get_time())
+    
     
 
     pygame.display.flip()
