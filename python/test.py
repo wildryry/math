@@ -36,28 +36,43 @@ class Player(pygame.sprite.Sprite):
 
         self.vol = pygame.math.Vector2(0,0)
 
+        self.pre_pos = pygame.math.Vector2(x,y)
+
         self.rect.x = x
         self.rect.y = y
 
     def update(self,delta_time):
 
         
-        self.vol = self.vol + gravity * delta_time/1000
+        
+
+        self.pre_pos = self.pos
 
         self.pos += self.vol * delta_time/1000
-        for sprite in Level_group:
-            if self.rect.colliderect(sprite.rect):
-                
-                
-                self.pos += pygame.math.Vector2(0,-1)
-                self.vol.y = 0
-                
-                None
+
+        self.vol += gravity * delta_time/1000
+        
+        
 
         
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y
         None
+
+
+        
+        for sprite in Level_group:
+            if self.rect.colliderect(sprite.rect):
+                
+                self.pos = self.pre_pos
+                
+                self.vol.y = 0
+                
+                self.rect.x = self.pos.x
+                self.rect.y = self.pos.y
+                
+                None
+        #'''
 
     def draw(self, surface):
         surface.blit(self.image , self.rect)
@@ -195,8 +210,16 @@ screen = pygame.display.set_mode((screen_width,screen_hight))
 
 done = False
 
-def move_player():
-    None
+def try_move_player(self, x_vol, y_vol):
+    for piece in Level_group:
+        self.rect.x += x_vol
+        self.rect.y += y_vol
+
+        if self.rect.colliderect(piece):
+            self.rect.x -= x_vol
+            self.rect.y -= y_vol
+            self.vol.y = 0
+            None
 
 
 def sense_key(key):
@@ -279,18 +302,18 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            click = pygame.mouse.get_pressed()
-            if click[0] == True:
-                mouse_down = True
-                shoot_arrow(75)
-            else:
-                mouse_down = False
-
+        #if event.type == pygame.MOUSEBUTTONDOWN:
+    click = pygame.mouse.get_pressed()
+    if click[0] == True:
+        mouse_down = True
+        shoot_arrow(75)
+    else:
+        mouse_down = False
+            
 
             
 
-        else: mouse_down = False
+        
 
 
         '''
@@ -337,9 +360,9 @@ while not done:
                 player.vol += pygame.math.Vector2(0,-600)
                 print('up' , w_time)
                 w_time = 0
-            else:
-                w_time += 1
-        None
+            
+    w_time += 1
+        
     if sense_key(pygame.K_s):
         for player in player_group:
             player.vol += pygame.math.Vector2(0,100)
