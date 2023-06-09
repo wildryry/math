@@ -50,7 +50,7 @@ class Player(pygame.sprite.Sprite):
                 
                 
                 self.pos += pygame.math.Vector2(0,-1)
-                self.vol = pygame.math.Vector2(0,0)
+                self.vol.y = 0
                 
                 None
 
@@ -229,7 +229,7 @@ def shoot_arrow(speedorg):
         dir = dir.normalize()
 
         
-        new_vector = pygame.math.Vector2(10,-20)
+        new_vector = pygame.math.Vector2(-15,-30)
         arrow_pos += new_vector
 
 
@@ -293,7 +293,7 @@ while not done:
         else: mouse_down = False
 
 
-
+        '''
         if event.type == pygame.KEYDOWN:
 
             if event.key == pygame.K_w:
@@ -328,6 +328,8 @@ while not done:
             akey = False
             wkey = False
             spacekey = False
+        #'''
+
 
     if sense_key(pygame.K_w):
         for player in player_group:
@@ -343,6 +345,15 @@ while not done:
             player.vol += pygame.math.Vector2(0,100)
         None
         
+    if sense_key(pygame.K_a):
+        for player in player_group:
+            player.vol += pygame.math.Vector2(-10,0)
+        None
+
+    if sense_key(pygame.K_d):
+        for player in player_group:
+            player.vol += pygame.math.Vector2(10,0)
+        None
 
     player_group.update(clock.get_time())
 
