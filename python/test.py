@@ -16,11 +16,13 @@ class Level_piece(pygame.sprite.Sprite):
 
     def update(self):
 
+       
+
         None
 
     def draw(self, surface):
         surface.blit(self.image , self.rect)
-        print('fdsad')
+        
         None
 
 
@@ -43,8 +45,14 @@ class Player(pygame.sprite.Sprite):
         self.vol = self.vol + gravity * delta_time/1000
 
         self.pos += self.vol * delta_time/1000
-
-
+        for sprite in Level_group:
+            if self.rect.colliderect(sprite.rect):
+                
+                
+                self.pos += pygame.math.Vector2(0,-1)
+                self.vol = pygame.math.Vector2(0,0)
+                
+                None
 
         
         self.rect.x = self.pos.x
@@ -71,6 +79,7 @@ class Arrow(pygame.sprite.Sprite):
         self.speed = speed
         self.vol = speed * dir 
         self.pos = pos
+        self.stuck = False
         
         self.rotation = 0#rotation 
         None
@@ -86,29 +95,30 @@ class Arrow(pygame.sprite.Sprite):
 
         vector = self.vol.normalize()
         #'''
-        if self.dir.y < 0 and self.dir.x < 0:
-            if vector.y < 0:
-                self.rotation = ma.degrees(ma.acos(vector.x) )+ 180
-                None
-            else:
-                self.rotation = ma.degrees(ma.asin(vector.y) ) + 0
-                None
+        if self.stuck == False:
+            if self.dir.y < 0 and self.dir.x < 0:
+                if vector.y < 0:
+                    self.rotation = ma.degrees(ma.acos(vector.x) )+ 180
+                    None
+                else:
+                    self.rotation = ma.degrees(ma.asin(vector.y) ) + 0
+                    None
 
-        elif self.dir.y > 0 and self.dir.x > 0:     
-            self.rotation = ma.degrees(ma.acos(vector.y) )+ 90
-            None
-
-        elif self.dir.y < 0 and self.dir.x > 0:
-            if vector.y < 0:
-                self.rotation = ma.degrees(ma.acos(vector.x) )+ 180
-                None
-            else:
+            elif self.dir.y > 0 and self.dir.x > 0:     
                 self.rotation = ma.degrees(ma.acos(vector.y) )+ 90
                 None
 
-        elif self.dir.y > 0 and self.dir.x < 0:     
-            self.rotation = ma.degrees(ma.asin(vector.y) ) + 0
-            None
+            elif self.dir.y < 0 and self.dir.x > 0:
+                if vector.y < 0:
+                    self.rotation = ma.degrees(ma.acos(vector.x) )+ 180
+                    None
+                else:
+                    self.rotation = ma.degrees(ma.acos(vector.y) )+ 90
+                    None
+
+            elif self.dir.y > 0 and self.dir.x < 0:     
+                self.rotation = ma.degrees(ma.asin(vector.y) ) + 0
+                None
 
 
 
@@ -120,7 +130,17 @@ class Arrow(pygame.sprite.Sprite):
         self.image = pygame.transform.rotate(self.orginal_image, self.rotation)
         
 
-        
+        for pieces in Level_group:
+            if self.rect.colliderect(pieces.rect):
+                self.vol = pygame.math.Vector2(0,0)
+                self.pos = pygame.math.Vector2(self.rect.x,self.rect.y)
+                if self.stuck == False:
+                    self.pos += self.vol * delta_time/1000 *5
+
+                    self.rect.x = self.pos.x
+                    self.rect.y = self.pos.y
+
+                self.stuck = True
         
         
         
@@ -152,7 +172,7 @@ screen_width = 1000
 screen_hight = 412
 
 
-gravity = pygame.math.Vector2(0,450)
+gravity = pygame.math.Vector2(0,700)
 
 mouse_x = 0
 
@@ -162,6 +182,11 @@ mouse_down = False
 
 akey = False
 
+skey = False
+
+wkey = False
+w_time = 0
+
 dkey = False
 
 clock = pygame.time.Clock()
@@ -170,20 +195,22 @@ screen = pygame.display.set_mode((screen_width,screen_hight))
 
 done = False
 
-def diff(num1, num2):
-    if num1 == num2:
-        return 1
-        None
-    elif num1 > num2:
-        return num1 - num2
-        None
+def move_player():
+    None
+
+
+def sense_key(key):
+    keys = pygame.key.get_pressed()
+    if keys[key]:
+        return True
     else:
-        return num2 - num1
-        None
+        return False
+    None
+
 
 def add_level_piece(x_pos,y_pos):
     
-    new_Level_piece = Level_piece(x_pos, y_pos)
+    new_Level_piece = Level_piece(x_pos - 400, y_pos)
     Level_group.add(new_Level_piece)
     all_sprites.add(new_Level_piece)    
 
@@ -237,13 +264,15 @@ def add_player(amount , x , y):
 
 add_player(1, 500, 100)
 
-add_level_piece(0,0)
+add_level_piece(screen_width*0.5,screen_hight*0.75)
 
 
 funny = 5
 
 while not done:
     
+    
+
     mouse_x,mouse_y = pygame.mouse.get_pos()
 
     for event in pygame.event.get():
@@ -274,7 +303,7 @@ while not done:
             
             if event.key == pygame.K_s:
                 skey = True
-                
+               
                 None
 
             if event.key == pygame.K_SPACE:
@@ -285,16 +314,12 @@ while not done:
 
             if event.key == pygame.K_a:
                 akey = True
-                for sprite in player_group:
-                    sprite.rect.x += -sprite.image.get_width()
-                    None
+                
             
 
             if event.key == pygame.K_d:
                 dkey = True
-                for sprite in player_group:
-                    sprite.rect.x += sprite.image.get_width()
-                None
+                
             
 
         else:
@@ -304,10 +329,28 @@ while not done:
             wkey = False
             spacekey = False
 
+    if sense_key(pygame.K_w):
+        for player in player_group:
+            if w_time > 20:
+                player.vol += pygame.math.Vector2(0,-600)
+                print('up' , w_time)
+                w_time = 0
+            else:
+                w_time += 1
+        None
+    if sense_key(pygame.K_s):
+        for player in player_group:
+            player.vol += pygame.math.Vector2(0,100)
+        None
+        
+
     player_group.update(clock.get_time())
 
     arrow_group.update(clock.get_time())
     
+
+    
+   
 
     screen.fill((3, 77, 61))
     Level_group.draw(screen)
@@ -315,7 +358,7 @@ while not done:
     player_group.draw(screen)
     
 
-    
+    Level_group.update()
     
     
 
