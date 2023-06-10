@@ -28,7 +28,6 @@ class Player(pygame.sprite.Sprite):
 
         
     def get_input(self):
-
         if sense_key(pygame.K_w):
           None  
         
