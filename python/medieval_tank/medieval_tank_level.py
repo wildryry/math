@@ -89,7 +89,7 @@ class Level:
         
         for arrow in self.arrows:
             for sprite in self.tiles.sprites():
-                if sprite.rect.colliderect(arrow.rect):
+                if sprite.rect.colliderect(arrow.rect) and sprite.color == 'orange':
                     arrow.kill()
             pass
 

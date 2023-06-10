@@ -1,10 +1,10 @@
 import pygame
 
 Level_map =[
-    '                                               ',
+    '      P                                        ',
     '    XXXX                                       ',
     '    XXX                  XXXXX                 ',
-    '    XX        P          B   B            XXGXX',
+    '    XX                   B   B            XXGXX',
     '    XX             X    XXGGGXX         XXBBGBBXX',
     '   XXX             X    B     B       XXBBBBBBBBBXX',
     '  XXXXX       XX   X    B     B         B   B   B',
