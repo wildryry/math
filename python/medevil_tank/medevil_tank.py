@@ -6,77 +6,13 @@ import sys
 
 import math as ma
 
-class Level_piece(pygame.sprite.Sprite):
-    def __init__(self,x,y):
-        super().__init__()
-        self.image = pygame.image.load('images/platform.png')
-        self.rect = self.image.get_rect(center = (x,y))
-        self.rect.x = x
-        self.rect.y = y
+from medevil_tank_setting import *
 
-    def update(self):
+from medevil_tiles import Tile
 
-       
+from medevil_tank_level import Level
 
-        None
-
-    def draw(self, surface):
-        surface.blit(self.image , self.rect)
-        
-        None
-
-
-class Player(pygame.sprite.Sprite):
-    def __init__(self,x,y):
-        super().__init__()
-        self.image = pygame.image.load('images/tank_sprite.png')
-        self.rect = self.image.get_rect(center = (x,y))
-
-        self.pos = pygame.math.Vector2(x,y)
-
-        self.vol = pygame.math.Vector2(0,0)
-
-        self.pre_pos = pygame.math.Vector2(x,y)
-
-        self.rect.x = x
-        self.rect.y = y
-
-    def update(self,delta_time):
-
-        
-        
-
-        self.pre_pos = self.pos
-
-        self.pos += self.vol * delta_time/1000
-
-        self.vol += gravity * delta_time/1000
-        
-        
-
-        
-        self.rect.x = self.pos.x
-        self.rect.y = self.pos.y
-        None
-
-
-        
-        for sprite in Level_group:
-            if self.rect.colliderect(sprite.rect):
-                
-                self.pos = self.pre_pos
-                
-                self.vol.y = 0
-                
-                self.rect.x = self.pos.x
-                self.rect.y = self.pos.y
-                
-                None
-        #'''
-
-    def draw(self, surface):
-        surface.blit(self.image , self.rect)
-        None
+from medevil_tank_player import Player
 
 
 class Arrow(pygame.sprite.Sprite):    
@@ -137,7 +73,7 @@ class Arrow(pygame.sprite.Sprite):
 
 
 
-        #'''
+        
 
         #print(self.rotation, ma.degrees(self.dir.x))
         
@@ -145,6 +81,7 @@ class Arrow(pygame.sprite.Sprite):
         self.image = pygame.transform.rotate(self.orginal_image, self.rotation)
         
 
+        '''
         for pieces in Level_group:
             if self.rect.colliderect(pieces.rect):
                 self.vol = pygame.math.Vector2(0,0)
@@ -156,7 +93,7 @@ class Arrow(pygame.sprite.Sprite):
                     self.rect.y = self.pos.y
 
                 self.stuck = True
-        
+        #'''
         
         
         self.rect.x = self.pos.x
@@ -176,39 +113,37 @@ class Arrow(pygame.sprite.Sprite):
 
 
 arrow_group = pygame.sprite.Group()
-
 all_sprites = pygame.sprite.Group()
-
 player_group = pygame.sprite.Group()
-
 Level_group =  pygame.sprite.Group()
 
-screen_width = 1000
-screen_hight = 412
 
 
-gravity = pygame.math.Vector2(0,700)
 
 mouse_x = 0
-
 mouse_y = 0
-
 mouse_down = False
-
 akey = False
-
 skey = False
-
 wkey = False
 w_time = 0
-
 dkey = False
 
+
 clock = pygame.time.Clock()
-
 screen = pygame.display.set_mode((screen_width,screen_hight)) 
-
 done = False
+level = Level(Level_map,screen)
+
+
+
+test_tile = pygame.sprite.Group(Tile((400,100),80))
+
+
+
+
+
+
 
 def try_move_player(self, x_vol, y_vol):
     for piece in Level_group:
@@ -231,13 +166,6 @@ def sense_key(key):
     None
 
 
-def add_level_piece(x_pos,y_pos):
-    
-    new_Level_piece = Level_piece(x_pos - 400, y_pos)
-    Level_group.add(new_Level_piece)
-    all_sprites.add(new_Level_piece)    
-
-    None
 
 def shoot_arrow(speedorg):
     
@@ -285,9 +213,9 @@ def add_player(amount , x , y):
         None
 
 
-add_player(1, 500, 100)
 
-add_level_piece(screen_width*0.5,screen_hight*0.75)
+
+
 
 
 funny = 5
@@ -358,7 +286,7 @@ while not done:
         for player in player_group:
             if w_time > 20:
                 player.vol += pygame.math.Vector2(0,-600)
-                print('up' , w_time)
+                
                 w_time = 0
             
     w_time += 1
@@ -391,6 +319,7 @@ while not done:
     arrow_group.draw(screen)
     player_group.draw(screen)
     
+    level.run()    
 
     Level_group.update()
     
