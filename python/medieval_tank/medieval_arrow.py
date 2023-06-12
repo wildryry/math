@@ -36,7 +36,7 @@ class Arrow(pygame.sprite.Sprite):
         vector = self.vol.normalize()
         #'''
         if self.stuck == False:
-            if self.dir.y < 0 and self.dir.x < 0:
+            if self.dir.y <= 0 and self.dir.x <= 0:
                 if vector.y < 0:
                     self.rotation = ma.degrees(ma.acos(vector.x) )+ 180
                     None

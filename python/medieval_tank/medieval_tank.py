@@ -97,12 +97,6 @@ def add_player(amount , x , y):
 
 
 
-
-
-
-
-funny = 5
-
 while not done:
     
     
@@ -122,21 +116,9 @@ while not done:
         mouse_down = False
                 
 
-    
-    
-
-    
-   
-
     screen.fill((3, 77, 61))
-    arrow_group.draw(screen)
-    player_group.draw(screen)
-    
-    level.run(clock)    
-    arrow_group.update(clock.get_time())
-    
-    
-    
+    level.run(clock)   
+     
 
     pygame.display.flip()
     clock.tick(60)

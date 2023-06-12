@@ -14,6 +14,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self,x,y):
         super().__init__()
         self.image = pygame.image.load('images/tank_sprite.png')
+        self.image_origonal = self.image
         self.rect = self.image.get_rect(center = (x + tile_size * 0.5,y + tile_size * 0.5))
 
         self.pos = pygame.math.Vector2(x,y)
@@ -31,17 +32,19 @@ class Player(pygame.sprite.Sprite):
         if sense_key(pygame.K_w):
           None  
         
-        elif sense_key(pygame.K_s):
+        if sense_key(pygame.K_s):
             
             None
             
-        elif sense_key(pygame.K_a):
+        if sense_key(pygame.K_a):
             self.vol.x = -1
+            self.image = self.image_origonal
             
             None
 
         elif sense_key(pygame.K_d):
             self.vol.x = 1
+            self.image = pygame.transform.flip(self.image_origonal, True, False)
             None
         else:
             self.vol.x = 0

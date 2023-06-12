@@ -1,18 +1,23 @@
 import pygame
 
 Level_map =[
-    '      P                                        ',
-    '    XXXX                                       ',
-    '    XXX                  XXXXX                 ',
-    '    XX                   B   B            XXGXX',
-    '    XX             X    XXGGGXX         XXBBGBBXX',
-    '   XXX             X    B     B       XXBBBBBBBBBXX',
-    '  XXXXX       XX   X    B     B         B   B   B',
-    ' XXXXXXX      BB   X    XXXXXXX   XXXXXXXXXXXXXXXXX',
+    
+    
+    '                                                      ',
+    '                                                      ',
+    '                                                      ',
+    '                         XXXXX                        ',
+    '    XXXX                 B   B            XXXXX       ',
+    '    XXX                  X   X            B   B       ',
+    '    XX                   B E B            XXGXX       ',
+    '    XX             X    XXGGGXX         XXBBGBBXX     ',
+    '   XXX        P    X    B     B       XXBBBBBBBBBXX   ',
+    '  XXXXX       XX   X    B     B         B   B   B     ',
+    ' XXXXXXX      BB   X    XXXXXXX   XXXXXXXXXXXXXXXXX   ',
     'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX']
 
 
-tile_size = 82
+tile_size = 80
 
 #for arrows
 gravity = pygame.math.Vector2(0,700)

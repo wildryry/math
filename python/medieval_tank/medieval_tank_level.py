@@ -2,6 +2,7 @@ import pygame
 from medieval_tiles import Tile
 from medieval_tank_setting import *
 from medieval_tank_player import Player
+from medieval_enemey_1 import Enemey 
 
 
 
@@ -9,13 +10,15 @@ class Level:
 
     def __init__(self, level_data, surface):
         self.display_surface = surface 
+        self.world_shift = 0
         self.setup_level(level_data)
         
-        self.world_shift = 0
+        
 
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
         self.arrows = pygame.sprite.Group()
+        self.enemeys = pygame.sprite.Group()
         self.player = pygame.sprite.GroupSingle()
         for row_index,row in enumerate(layout):
             for col_index,cell in enumerate(row):
@@ -30,7 +33,8 @@ class Level:
                 
                 if cell == 'P':
 
-                    player_sprite = Player(x,y)
+                    player_sprite = Player(screen_width/2,y)
+                    self.world_shift = -x + screen_width/2
                     self.player.add(player_sprite)
                     
                 if cell == 'B':
@@ -42,6 +46,11 @@ class Level:
 
                     tile = Tile((x,y), tile_size, 'green')
                     self.tiles.add(tile)
+
+                if cell == 'E':
+                    enemey_sprite = Enemey((x - tile_size*4,y))
+                    self.enemeys.add(enemey_sprite)
+                    
 
     def scroll_x(self):
         player = self.player.sprite
@@ -104,11 +113,18 @@ class Level:
         self.arrow_collision()
         self.arrows.draw(self.display_surface)
 
+        #enemey
+        self.enemeys.draw(self.display_surface)
+        self.enemeys.update(self.world_shift, self.display_surface)
+        
+
         #player
         self.player.update()
         self.horiz_movement_collision()
         self.vert_movement_collision()
         self.player.draw(self.display_surface)
+
+        
         
         
         
