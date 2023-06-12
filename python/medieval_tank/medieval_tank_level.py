@@ -48,7 +48,7 @@ class Level:
                     self.tiles.add(tile)
 
                 if cell == 'E':
-                    enemey_sprite = Enemey((x - tile_size*4,y))
+                    enemey_sprite = Enemey((x,y))
                     self.enemeys.add(enemey_sprite)
                     
 
@@ -103,6 +103,11 @@ class Level:
             pass
 
     def run(self,clock):
+
+        #enemey
+        self.enemeys.draw(self.display_surface)
+        self.enemeys.update(self.world_shift, self.display_surface)
+
         #tiles
         self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)
@@ -113,11 +118,7 @@ class Level:
         self.arrow_collision()
         self.arrows.draw(self.display_surface)
 
-        #enemey
-        self.enemeys.draw(self.display_surface)
-        self.enemeys.update(self.world_shift, self.display_surface)
         
-
         #player
         self.player.update()
         self.horiz_movement_collision()

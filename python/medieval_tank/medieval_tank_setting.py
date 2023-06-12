@@ -3,18 +3,18 @@ import pygame
 Level_map =[
     
     
-    '                                                      ',
-    '                                                      ',
-    '                                                      ',
-    '                         XXXXX                        ',
-    '    XXXX                 B   B            XXXXX       ',
-    '    XXX                  X   X            B   B       ',
-    '    XX                   B E B            XXGXX       ',
-    '    XX             X    XXGGGXX         XXBBGBBXX     ',
-    '   XXX        P    X    B     B       XXBBBBBBBBBXX   ',
-    '  XXXXX       XX   X    B     B         B   B   B     ',
-    ' XXXXXXX      BB   X    XXXXXXX   XXXXXXXXXXXXXXXXX   ',
-    'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX']
+    '                                                                      ',
+    '                                                                      ',
+    '                                                                      ',
+    '       P                 XXXXX              E                         ',
+    '      XX                 B   B            XXXXX                       ',
+    '     XX                  X   X            B   B                       ',
+    '    XX                   B   B            XXGXX                       ',
+    '    XX             X    XXGGGXX         XXBBGBBXX                     ',
+    '   XXX             X    B     B       XXBBBBBBBBBXX                                          X  EEEEEEEEE',
+    '  XXXXX       XX   X    B     B         B   B   B          X    X                           XX  EEEEEEEEE',
+    ' XXXXXXX      BB   X    XXXXXXX   XXXXXXXXXXXXXXXXX        X    X                           BB  EEEEEEEEE',
+    'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX']
 
 
 tile_size = 80

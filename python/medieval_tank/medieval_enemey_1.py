@@ -12,8 +12,8 @@ class Enemey(pygame.sprite.Sprite):
         
 
     def update(self, x_shift, display_surface):
-        
+        pygame.draw.rect(display_surface, 'RED', self.rect, width = 1)
         self.rect.x += x_shift
-        pygame.draw.rect(display_surface, 'RED', self.rect, width = 5)
+        
         
         
