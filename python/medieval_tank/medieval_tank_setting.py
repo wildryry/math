@@ -3,17 +3,17 @@ import pygame
 Level_map =[
     
     
-    '                                                                      ',
-    '                                                                      ',
-    '                                                                      ',
-    '       P                 XXXXX              E                         ',
-    '      XX                 B   B            XXXXX                       ',
-    '     XX                  X   X            B   B                       ',
-    '    XX                   B   B            XXGXX                       ',
-    '    XX             X    XXGGGXX         XXBBGBBXX                     ',
-    '   XXX             X    B     B       XXBBBBBBBBBXX                                          X  EEEEEEEEE',
-    '  XXXXX       XX   X    B     B         B   B   B          X    X                           XX  EEEEEEEEE',
-    ' XXXXXXX      BB   X    XXXXXXX   XXXXXXXXXXXXXXXXX        X    X                           BB  EEEEEEEEE',
+    '                                                                                                                        ',
+    '                                                                                                                        ',
+    '                                                                                                                        ',
+    '                         XXXXX              E                                                                           ',
+    '      XX                 B   B            XXXXX                                                                         ',
+    '     XX                  X P X            B   B                                                                         ',
+    '    XX                   B   B            XXGXX                                                                         ',
+    '    XX             X    XXGGGXX         XXBBGBBXX                                                                       ',
+    '   XXX             X    B     B       XXBBBBBBBBBXX                                          X                          ',
+    '  XXXXX       XX   X    B     B         B   B   B          X    X                           XX                          ',
+    ' XXXXXXX      BB   X    XXXXXXX   XXXXXXXXXXXXXXXXX        X    X                           BB                          ',
     'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX']
 
 

@@ -12,9 +12,7 @@ class Level:
         self.display_surface = surface 
         self.world_shift = 0
         self.setup_level(level_data)
-        
-        
-
+                
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
         self.arrows = pygame.sprite.Group()
@@ -28,7 +26,7 @@ class Level:
                 
                 if cell == 'X':
 
-                    tile = Tile((x,y), tile_size, 'orange')
+                    tile = Tile((x,y), tile_size, 'orange', self.display_surface)
                     self.tiles.add(tile)
                 
                 if cell == 'P':
@@ -39,19 +37,18 @@ class Level:
                     
                 if cell == 'B':
 
-                    tile = Tile((x,y), tile_size, 'blue')
+                    tile = Tile((x,y), tile_size, 'blue', self.display_surface)
                     self.tiles.add(tile)
 
                 if cell == 'G':
 
-                    tile = Tile((x,y), tile_size, 'green')
+                    tile = Tile((x,y), tile_size, 'green', self.display_surface)
                     self.tiles.add(tile)
 
                 if cell == 'E':
                     enemey_sprite = Enemey((x,y))
                     self.enemeys.add(enemey_sprite)
                     
-
     def scroll_x(self):
         player = self.player.sprite
         player_x = player.rect.centerx
@@ -99,7 +96,7 @@ class Level:
         for arrow in self.arrows:
             for sprite in self.tiles.sprites():
                 if sprite.rect.colliderect(arrow.rect) and sprite.color == 'orange':
-                    arrow.kill()
+                    arrow.stick()
             pass
 
     def run(self,clock):
@@ -109,13 +106,13 @@ class Level:
         self.enemeys.update(self.world_shift, self.display_surface)
 
         #tiles
-        self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)
+        self.tiles.update(self.world_shift)
         self.scroll_x()
 
         #arrows
-        self.arrows.update(clock.get_time(),self)
         self.arrow_collision()
+        self.arrows.update(clock.get_time(),self)
         self.arrows.draw(self.display_surface)
 
         

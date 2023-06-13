@@ -2,6 +2,7 @@ import pygame
 from medieval_tank_setting import *
 
 
+
 def sense_key(key):
     keys = pygame.key.get_pressed()
     if keys[key]:
@@ -27,8 +28,18 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 0.3
         self.jump_speed = -11
 
-        
     def get_input(self):
+
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                click = pygame.mouse.get_pressed()
+                if click[0] == True:
+                    new_arrow = self.shoot_arrow(75, 5)
+                    mouse_down = True
+                else:
+                    mouse_down = False
+
+
         if sense_key(pygame.K_w):
           None  
         
@@ -52,23 +63,21 @@ class Player(pygame.sprite.Sprite):
         if sense_key(pygame.K_SPACE):
             self.jump()
 
-
+        return new_arrow
+        
     def apply_gravity(self):
         self.vol.y += self.gravity
         self.rect.y += self.vol.y
-
 
     def jump(self):
         if self.grounded:
             self.vol.y = self.jump_speed
             self.grounded = False
 
-
     def update(self):
         self.get_input()
         
         None
-
 
     def draw(self, surface):
         surface.blit(self.image , self.rect)

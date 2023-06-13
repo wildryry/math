@@ -48,43 +48,10 @@ def sense_key(key):
         return False
     None
 
-
-
-def shoot_arrow(speedorg):
-    
-    for sprite in level.player:
-
-        player_vector = pygame.math.Vector2(sprite.rect.center)
-        arrow_pos = pygame.math.Vector2(sprite.rect.center)
-
-        mouse_vector = pygame.math.Vector2((mouse_x,mouse_y))
-
-        dir = mouse_vector - player_vector
-        dir = dir.normalize()
-
         
-        new_vector = pygame.math.Vector2(-15,-30)
-        arrow_pos += new_vector
-
-
-        speed = speedorg * 10
-        
-        add_arrow(arrow_pos , speed , dir) 
-        
-   
-        
-
-
-def add_arrow(arrow_pos , speed ,dir):
-
-    
-
     
     
     
-    new_arrow = Arrow(arrow_pos, speed , dir)
-    level.arrows.add(new_arrow)
-    all_sprites.add(new_arrow)
         
     None
 def add_player(amount , x , y):
@@ -107,13 +74,7 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
 
-        #if event.type == pygame.MOUSEBUTTONDOWN:
-    click = pygame.mouse.get_pressed()
-    if click[0] == True:
-        shoot_arrow(75)
-        mouse_down = True
-    else:
-        mouse_down = False
+        
                 
 
     screen.fill((3, 77, 61))
