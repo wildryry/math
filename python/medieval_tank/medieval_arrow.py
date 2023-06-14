@@ -1,7 +1,7 @@
 import pygame
 import math as ma
 from medieval_tank_setting import *
-from medieval_tank_level import Level
+
 
 class Arrow(pygame.sprite.Sprite):    
     def __init__(self, pos , speed, dir, time):

@@ -3,7 +3,7 @@ from medieval_tiles import Tile
 from medieval_tank_setting import *
 from medieval_tank_player import Player
 from medieval_enemey_1 import Enemey 
-
+from medieval_arrow import Arrow
 
 
 class Level:
@@ -11,6 +11,8 @@ class Level:
     def __init__(self, level_data, surface):
         self.display_surface = surface 
         self.world_shift = 0
+        self.mouse_down = False
+        self.mouse_delay = 0
         self.setup_level(level_data)
                 
     def setup_level(self, layout):
@@ -99,6 +101,30 @@ class Level:
                     arrow.stick()
             pass
 
+    def shoot_arrow(self, speedorg, time):
+        
+        mouse_x,mouse_y = pygame.mouse.get_pos()
+
+        for sprite in self.player:
+
+            player_vector = pygame.math.Vector2(sprite.rect.center)
+            arrow_pos = pygame.math.Vector2(sprite.rect.center)
+
+            mouse_vector = pygame.math.Vector2((mouse_x,mouse_y))
+
+            dir = mouse_vector - player_vector
+            dir = dir.normalize()
+
+            
+            new_vector = pygame.math.Vector2(-15,-30)
+            arrow_pos += new_vector
+
+
+            speed = speedorg * 10
+            
+            new_arrow = Arrow(arrow_pos, speed , dir, time)
+            self.arrows.add(new_arrow)
+    
     def run(self,clock):
 
         #enemey
@@ -114,6 +140,13 @@ class Level:
         self.arrow_collision()
         self.arrows.update(clock.get_time(),self)
         self.arrows.draw(self.display_surface)
+        
+        click = pygame.mouse.get_pressed()
+        if click[0] == True:
+            self.shoot_arrow(75, 5)
+            self.mouse_down = True
+        else:
+            self.mouse_down = False
 
         
         #player

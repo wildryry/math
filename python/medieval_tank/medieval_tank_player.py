@@ -24,20 +24,13 @@ class Player(pygame.sprite.Sprite):
 
         self.grounded = False
         self.vol = pygame.math.Vector2(0,0)
-        self.speed = 5
-        self.gravity = 0.3
-        self.jump_speed = -11
+        self.speed = 10
+        self.gravity = 0.6
+        self.jump_speed = -15
 
     def get_input(self):
 
-        for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                click = pygame.mouse.get_pressed()
-                if click[0] == True:
-                    new_arrow = self.shoot_arrow(75, 5)
-                    mouse_down = True
-                else:
-                    mouse_down = False
+    
 
 
         if sense_key(pygame.K_w):
@@ -63,7 +56,6 @@ class Player(pygame.sprite.Sprite):
         if sense_key(pygame.K_SPACE):
             self.jump()
 
-        return new_arrow
         
     def apply_gravity(self):
         self.vol.y += self.gravity
