@@ -11,7 +11,7 @@ class Arrow(pygame.sprite.Sprite):
         self.orginal_image = pygame.image.load('images/arrow.png')
         self.image = pygame.transform.rotate(self.orginal_image, rotation)
         self.rect = self.image.get_rect(center = pos)
-
+        
         
         self.gravity = gravity
 
@@ -95,3 +95,4 @@ class Arrow(pygame.sprite.Sprite):
 
     def draw(self,surface):
         surface.blit(self.image , self.rect)
+        

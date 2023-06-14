@@ -12,7 +12,8 @@ class Level:
         self.display_surface = surface 
         self.world_shift = 0
         self.mouse_down = False
-        self.mouse_delay = 0
+        self.mouse_delay = 0.5 # <-  in seconds
+        self.mouse_time = self.mouse_delay*60
         self.setup_level(level_data)
                 
     def setup_level(self, layout):
@@ -129,26 +130,32 @@ class Level:
 
         #enemey
         self.enemeys.draw(self.display_surface)
-        self.enemeys.update(self.world_shift, self.display_surface)
+        self.enemeys.update(self.world_shift, self.display_surface, self.arrows)
 
-        #tiles
+        #tiles       
         self.tiles.draw(self.display_surface)
         self.tiles.update(self.world_shift)
-        self.scroll_x()
+        
 
         #arrows
-        self.arrow_collision()
         self.arrows.update(clock.get_time(),self)
+        self.arrow_collision()
         self.arrows.draw(self.display_surface)
         
+        
+        #mouse input
         click = pygame.mouse.get_pressed()
-        if click[0] == True:
+        if click[0] == True and self.mouse_time >= self.mouse_delay*60:
             self.shoot_arrow(75, 5)
             self.mouse_down = True
+            self.mouse_time = 0
         else:
+            self.mouse_time += 1
             self.mouse_down = False
-
         
+        #tile scoll
+        self.scroll_x()    
+
         #player
         self.player.update()
         self.horiz_movement_collision()

@@ -23,6 +23,7 @@ class Player(pygame.sprite.Sprite):
 
 
         self.grounded = False
+        self.sled = False
         self.vol = pygame.math.Vector2(0,0)
         self.speed = 10
         self.gravity = 0.6
@@ -39,20 +40,23 @@ class Player(pygame.sprite.Sprite):
         if sense_key(pygame.K_s):
             
             None
-            
-        if sense_key(pygame.K_a):
-            self.vol.x = -1
-            self.image = self.image_origonal
-            
-            None
+        if self.sled == False:
+            if sense_key(pygame.K_a):
+                self.vol.x = -1
+                self.image = self.image_origonal
+                
+                None
 
-        elif sense_key(pygame.K_d):
-            self.vol.x = 1
-            self.image = pygame.transform.flip(self.image_origonal, True, False)
-            None
-        else:
-            self.vol.x = 0
-            None
+            elif sense_key(pygame.K_d):
+                self.vol.x = 1
+                self.image = pygame.transform.flip(self.image_origonal, True, False)
+                None
+            else:
+                self.vol.x = 0
+                None
+            
+        
+
         if sense_key(pygame.K_SPACE):
             self.jump()
 
