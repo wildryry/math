@@ -1,5 +1,7 @@
 import pygame
 
+pygame.display.set_caption('medieval_tank')
+
 Level_map =[
     
     
