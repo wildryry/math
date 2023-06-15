@@ -11,6 +11,7 @@ class Arrow(pygame.sprite.Sprite):
         self.orginal_image = pygame.image.load('images/arrow.png')
         self.image = pygame.transform.rotate(self.orginal_image, rotation)
         self.rect = self.image.get_rect(center = pos)
+        self.hit_box = pygame.Rect(pos,(15,15))
         
         
         self.gravity = gravity
@@ -25,7 +26,7 @@ class Arrow(pygame.sprite.Sprite):
         self.rotation = 0#rotation 
         None
 
-    def update(self,delta_time,level):
+    def update(self,delta_time,level,surface):
 
         
         
@@ -61,13 +62,16 @@ class Arrow(pygame.sprite.Sprite):
                 self.rotation = ma.degrees(ma.asin(vector.y) ) + 0
                 None
 
+        vector2 = vector + self.dir
 
-
+        self.hit_box.x = self.pos.x - vector2.x *15
+        self.hit_box.y = self.pos.y - vector2.y *15
+        print(self.hit_box)
         
 
         #print(self.rotation, ma.degrees(self.dir.x))
         
-
+        pygame.draw.rect(surface, 'red', self.hit_box, width = 50)
         self.image = pygame.transform.rotate(self.orginal_image, self.rotation)
         
         if self.stuck:
@@ -76,10 +80,13 @@ class Arrow(pygame.sprite.Sprite):
                 self.kill()
             else:
                 self.death_time += -1
+            self.vol = pygame.math.Vector2(0,0)
             self.vol *= 0
             self.rect.x = self.pos.x 
         else:
         
+            
+
             self.rect.x = self.pos.x 
             self.rect.y = self.pos.y
             
@@ -95,4 +102,5 @@ class Arrow(pygame.sprite.Sprite):
 
     def draw(self,surface):
         surface.blit(self.image , self.rect)
+        
         

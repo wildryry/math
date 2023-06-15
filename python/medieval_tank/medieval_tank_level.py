@@ -138,7 +138,7 @@ class Level:
         
 
         #arrows
-        self.arrows.update(clock.get_time(),self)
+        self.arrows.update(clock.get_time(),self,self.display_surface)
         self.arrow_collision()
         self.arrows.draw(self.display_surface)
         
