@@ -1,6 +1,6 @@
 import pygame
 from medieval_tank_setting import *
-
+from tank_head import Head1
 
 
 def sense_key(key):
@@ -18,10 +18,13 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.scale_by(self.image, 5)
         self.image_origonal = self.image
         self.rect = self.image.get_rect(center = (x + tile_size * 0.5,y + tile_size * 0.5))
+        self.head = pygame.sprite.Group()
 
         self.pos = pygame.math.Vector2(x,y)
         self.pre_pos = pygame.math.Vector2(x,y)
 
+        head = Head1((self.pos.x,self.pos.y - 30))
+        self.head.add(head)
 
         self.grounded = False
         self.sled = False
@@ -73,9 +76,11 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.get_input()
+        self.head.update(self.rect.center)
         
         None
 
     def draw(self, surface):
         surface.blit(self.image , self.rect)
+        self.head.draw(surface)
         None

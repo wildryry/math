@@ -27,7 +27,7 @@ class Arrow(pygame.sprite.Sprite):
         None
 
     def update(self,delta_time,level,surface):
-
+        self.hit_box.center = self.rect.center
         
         
 
@@ -36,19 +36,18 @@ class Arrow(pygame.sprite.Sprite):
         self.pos += self.vol * delta_time/1000
         self.pos.x += level.world_shift
         vector = self.vol.normalize()
+
         #'''
         if self.stuck == False:
             if self.dir.y <= 0 and self.dir.x <= 0:
                 if vector.y < 0:
+
                     self.rotation = ma.degrees(ma.acos(vector.x) )+ 180
                     None
+
                 else:
                     self.rotation = ma.degrees(ma.asin(vector.y) ) + 0
                     None
-
-                
-                self.hit_box.x = self.pos.x
-                self.hit_box.y = self.pos.y
 
             elif self.dir.y > 0 and self.dir.x > 0:     
                 self.rotation = ma.degrees(ma.acos(vector.y) )+ 90
@@ -56,12 +55,10 @@ class Arrow(pygame.sprite.Sprite):
 
             elif self.dir.y < 0 and self.dir.x > 0:
                 if vector.y < 0:
+
                     self.rotation = ma.degrees(ma.acos(vector.x) )+ 180
                     None
-
-                    self.hit_box.x = self.pos.x - 15
-                    self.hit_box.y = self.pos.y
-
+                    
                 else:
                     self.rotation = ma.degrees(ma.acos(vector.y) )+ 90
                     None
@@ -71,16 +68,16 @@ class Arrow(pygame.sprite.Sprite):
                 self.rotation = ma.degrees(ma.asin(vector.y) ) + 0
                 None
         
-        vector2 = vector*30
+            vector2 = vector*15
 
-        #self.hit_box.x = self.pos.x
-        #self.hit_box.y = self.pos.y
+            self.hit_box.x = vector2.x + self.pos.x + 15
+            self.hit_box.y = vector2.y + self.pos.y + 15
         
         
 
         #print(self.rotation, ma.degrees(self.dir.x))
         
-        pygame.draw.rect(surface, 'red', self.hit_box, width = 50)
+        #pygame.draw.rect(surface, 'red', self.hit_box, width = 50)
         self.image = pygame.transform.rotate(self.orginal_image, self.rotation)
         
         if self.stuck:
