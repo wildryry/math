@@ -157,11 +157,13 @@ class Level:
         self.scroll_x()    
 
         #player
-        self.player.update()
+        self.player.update(self.display_surface)
         self.horiz_movement_collision()
         self.vert_movement_collision()
         self.player.draw(self.display_surface)
-
+        player = self.player.sprite
+        player.head.draw(self.display_surface)
+        
         
         
         

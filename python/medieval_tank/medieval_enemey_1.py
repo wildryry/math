@@ -14,7 +14,7 @@ class Enemey(pygame.sprite.Sprite):
     def hit_check(self, arrows):
 
         for arrow in arrows.sprites():
-            if self.rect.colliderect(arrow) and arrow.stuck == False:
+            if self.rect.colliderect(arrow.hit_box) and arrow.stuck == False:
                 self.HP += -1
                 arrow.kill()
                 if self.HP <= 0:

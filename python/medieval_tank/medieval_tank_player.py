@@ -30,7 +30,7 @@ class Player(pygame.sprite.Sprite):
         self.sled = False
         self.vol = pygame.math.Vector2(0,0)
         self.speed = 10
-        self.gravity = 0.6
+        self.gravity = 0.65
         self.jump_speed = -15
 
     def get_input(self):
@@ -78,9 +78,7 @@ class Player(pygame.sprite.Sprite):
         self.get_input()
         self.head.update(self.rect.center)
         
-        None
+        
+        
 
-    def draw(self, surface):
-        surface.blit(self.image , self.rect)
-        self.head.draw(surface)
-        None
+    

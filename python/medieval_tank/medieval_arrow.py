@@ -37,7 +37,8 @@ class Arrow(pygame.sprite.Sprite):
         self.pos.x += level.world_shift
         vector = self.vol.normalize()
 
-        #'''
+        #rotation
+
         if self.stuck == False:
             if self.dir.y <= 0 and self.dir.x <= 0:
                 if vector.y < 0:
