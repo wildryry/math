@@ -11,8 +11,8 @@ class Arrow(pygame.sprite.Sprite):
         self.orginal_image = pygame.image.load('images/arrow.png')
         self.image = pygame.transform.rotate(self.orginal_image, rotation)
         self.rect = self.image.get_rect(center = pos)
-        self.hit_box = pygame.Rect(pos,(15,15))
-        
+        self.hit_box = pygame.Rect(pos , (15,15))
+        self.hit_box.center = pos
         
         self.gravity = gravity
 
@@ -46,6 +46,10 @@ class Arrow(pygame.sprite.Sprite):
                     self.rotation = ma.degrees(ma.asin(vector.y) ) + 0
                     None
 
+                
+                self.hit_box.x = self.pos.x
+                self.hit_box.y = self.pos.y
+
             elif self.dir.y > 0 and self.dir.x > 0:     
                 self.rotation = ma.degrees(ma.acos(vector.y) )+ 90
                 None
@@ -54,19 +58,24 @@ class Arrow(pygame.sprite.Sprite):
                 if vector.y < 0:
                     self.rotation = ma.degrees(ma.acos(vector.x) )+ 180
                     None
+
+                    self.hit_box.x = self.pos.x - 15
+                    self.hit_box.y = self.pos.y
+
                 else:
                     self.rotation = ma.degrees(ma.acos(vector.y) )+ 90
                     None
 
+
             elif self.dir.y > 0 and self.dir.x < 0:     
                 self.rotation = ma.degrees(ma.asin(vector.y) ) + 0
                 None
+        
+        vector2 = vector*30
 
-        vector2 = vector + self.dir
-
-        self.hit_box.x = self.pos.x - vector2.x *15
-        self.hit_box.y = self.pos.y - vector2.y *15
-        print(self.hit_box)
+        #self.hit_box.x = self.pos.x
+        #self.hit_box.y = self.pos.y
+        
         
 
         #print(self.rotation, ma.degrees(self.dir.x))

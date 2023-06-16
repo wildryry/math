@@ -14,7 +14,8 @@ def sense_key(key):
 class Player(pygame.sprite.Sprite):
     def __init__(self,x,y):
         super().__init__()
-        self.image = pygame.image.load('images/tank_sprite.png')
+        self.image = pygame.image.load('images/tank_sprite1.1.png')
+        self.image = pygame.transform.scale_by(self.image, 5)
         self.image_origonal = self.image
         self.rect = self.image.get_rect(center = (x + tile_size * 0.5,y + tile_size * 0.5))
 
