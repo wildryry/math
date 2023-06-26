@@ -89,10 +89,13 @@ class Level:
             if sprite.rect.colliderect(player.rect) and sprite.color == 'orange' or sprite.rect.colliderect(player.rect) and sprite.color == 'green':
                 if player.vol.y < 0  and sprite.color == 'orange':
                     player.rect.top = sprite.rect.bottom
+                    
                 elif player.vol.y > 0:
                     player.rect.bottom = sprite.rect.top
                     player.grounded = True
+                    player.vol.y * -1
                 player.vol.y = 0
+                
 
     def arrow_collision(self):
         

@@ -12,8 +12,8 @@ Level_map =[
     '      XX                 B   B            XXXXX                                                                         ',
     '     XX                  X   X            B   B                                          XXXX                           ',
     '    XX                   B   B            XXGXX                                         B    B                          ',
-    '    XX             X    XXGGGXX         XXBBGBBXX                                       X    X                          ',
-    '   XXX             X    B     B       XXBBBBBBBBBXX                        EEE          X    X                          ',
+    '    XX             X    XXGGGXX         XXBBGBBXX       G                               X    X                          ',
+    '   XXX             X    B     B       XXBBBBBBBBBXX     G                  EEE          X    X                          ',
     '  XXXXX       XX   X    B     B         B   B   B          X    X          EEE          XXBBXX                          ',
     ' XXXXXXX      BB   X    XXXXXXX   XXXXXXXXXXXXXXXXX        X    X          EEE          BB  BB                          ',
     'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX']
