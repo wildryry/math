@@ -157,7 +157,7 @@ class Level:
         self.scroll_x()    
 
         #player
-        self.player.update(self.display_surface)
+        self.player.update()
         self.horiz_movement_collision()
         self.vert_movement_collision()
         self.player.draw(self.display_surface)

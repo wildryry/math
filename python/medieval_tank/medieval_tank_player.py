@@ -32,6 +32,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = 10
         self.gravity = 0.65
         self.jump_speed = -15
+        self.flipped = False
 
     def get_input(self):
 
@@ -48,12 +49,14 @@ class Player(pygame.sprite.Sprite):
             if sense_key(pygame.K_a):
                 self.vol.x = -1
                 self.image = self.image_origonal
+                self.flipped = False
                 
                 None
 
             elif sense_key(pygame.K_d):
                 self.vol.x = 1
                 self.image = pygame.transform.flip(self.image_origonal, True, False)
+                self.flipped = True
                 None
             else:
                 self.vol.x = 0
@@ -76,7 +79,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.get_input()
-        self.head.update(self.rect.center)
+        self.head.update(self.rect.center, self.flipped)
         
         
         
