@@ -15,3 +15,6 @@ class Wall(pygame.sprite.Sprite):
         #    pygame.draw.rect(self.display_surface, (230,170,200), self.rect, width = 2)
         #self.rect.x += x_shift
         None
+    def draw(self,surface):
+        surface.blit(self.image,self.rect)
+        print('g')
