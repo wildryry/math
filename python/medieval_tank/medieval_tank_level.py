@@ -45,7 +45,7 @@ class Level:
 
                 if cell == 'G':
 
-                    tile = Tile((x,y), tile_size, 'green', self.display_surface)
+                    tile = Tile((x,y), tile_size, 'ladder', self.display_surface)
                     self.tiles.add(tile)
 
                 if cell == 'E':
