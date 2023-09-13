@@ -1,3 +1,4 @@
+
 import pygame 
 from medieval_tiles import Tile
 from medieval_tank_setting import *
@@ -15,6 +16,8 @@ class Level:
         self.mouse_delay = 0.5 # <-  in seconds
         self.mouse_time = self.mouse_delay*60
         self.setup_level(level_data)
+        self.find_rim()
+
                 
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
@@ -51,7 +54,12 @@ class Level:
                 if cell == 'E':
                     enemey_sprite = Enemey((x,y))
                     self.enemeys.add(enemey_sprite)
-                    
+
+    def find_rim(self):
+        for sprite in self.tiles.sprites():
+            sprite.pos 
+            None
+
     def scroll_x(self):
         player = self.player.sprite
         player_x = player.rect.centerx

@@ -5,17 +5,17 @@ pygame.display.set_caption('medieval_tank')
 Level_map =[
     
     
+    '                                                                        P                                               ',
     '                                                                                                                        ',
     '                                                                                                                        ',
-    '                           P                                                                                            ',
     '                         XXXXX              E                                                                           ',
     '      XX                 B   B            XXXXX                                                                         ',
     '     XX                  X   X            B   B                                          XXXX                           ',
     '    XX                   B   B            XXGXX                                         B    B                          ',
-    '    XX             X    XXGGGXX         XXBBGBBXX       G                               X    X                          ',
+    '    XX             X    XXGGGXX    X    XXBBGBBXX       G                               X    X                          ',
     '   XXX             X    B     B       XXBBBBBBBBBXX     G                  EEE          X    X                          ',
-    '  XXXXX       XX   X    B     B         B   B   B          X    X          EEE          XXBBXX                          ',
-    ' XXXXXXX      BB   X    XXXXXXX   XXXXXXXXXXXXXXXXXX       X    X          EEE          BB  BB                          ',
+    '  XXXXX       XX   X    B     B         B   B   B                          EEE          XXBBXX                          ',
+    ' XXXXXXX      BB   X    XXXXXXX   XXXXXXXXXXXXXXXXXX       XXXXXX          EEE          BB  BB                          ',
     'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX']
 
 

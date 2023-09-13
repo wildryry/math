@@ -21,12 +21,17 @@ class Tile(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft = pos)
         self.color = color
         self.display_surface = display_surface
+        self.pos = pos
 
         None
+        
+        pass
     
     def update(self, x_shift):
         #outlines
         #if self.color == 'orange':
         #    pygame.draw.rect(self.display_surface, (230,170,200), self.rect, width = 2)
+
+
         self.rect.x += x_shift
         None
