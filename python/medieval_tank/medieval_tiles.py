@@ -8,7 +8,7 @@ class Tile(pygame.sprite.Sprite):
             self.image.fill(color)
             self.collision = False
         else:
-            self.image = pygame.image.load('images/rock_tile_80x80.png')
+            self.image = pygame.image.load('images/brick.png')
             self.collision = True
 
             pass
