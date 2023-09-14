@@ -1,3 +1,4 @@
+
 import pygame 
 from medieval_tiles import Tile
 from medieval_tank_setting import *
@@ -15,6 +16,7 @@ class Level:
         self.mouse_delay = 0.5 # <-  in seconds
         self.mouse_time = self.mouse_delay*60
         self.setup_level(level_data)
+        self.find_rim()
                 
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
@@ -29,7 +31,7 @@ class Level:
                 
                 if cell == 'X':
 
-                    tile = Tile((x,y), tile_size, 'orange', self.display_surface)
+                    tile = Tile((x,y), tile_size, 'rock', self.display_surface)
                     self.tiles.add(tile)
                 
                 if cell == 'P':
@@ -45,13 +47,23 @@ class Level:
 
                 if cell == 'G':
 
-                    tile = Tile((x,y), tile_size, 'green', self.display_surface)
+                    tile = Tile((x,y), tile_size, 'ladder', self.display_surface)
                     self.tiles.add(tile)
 
                 if cell == 'E':
                     enemey_sprite = Enemey((x,y))
                     self.enemeys.add(enemey_sprite)
+
+    def find_rim(self):
+        for sprite in self.tiles.sprites():
+            for tile in self.tiles.sprites():
+                if tile.rect.collidepoint(sprite.pos[0]+40,sprite.pos[1]-40) and tile.color != 'blue': 
+                    sprite.switch_texture(2)
+                    None
+                #else:
+                    #sprite.switch_texture(2)
                     
+
     def scroll_x(self):
         player = self.player.sprite
         player_x = player.rect.centerx
@@ -75,7 +87,7 @@ class Level:
         player.rect.x += player.vol.x * player.speed 
 
         for sprite in self.tiles.sprites():
-            if sprite.rect.colliderect(player.rect) and sprite.color == 'orange':
+            if sprite.rect.colliderect(player.rect) and sprite.collision == True:
                 if player.vol.x < 0:
                     player.rect.left = sprite.rect.right
                 elif player.vol.x > 0:
@@ -86,8 +98,8 @@ class Level:
         player.apply_gravity()
 
         for sprite in self.tiles.sprites():
-            if sprite.rect.colliderect(player.rect) and sprite.color == 'orange' or sprite.rect.colliderect(player.rect) and sprite.color == 'green':
-                if player.vol.y < 0  and sprite.color == 'orange':
+            if sprite.rect.colliderect(player.rect) and sprite.collision == True or sprite.rect.colliderect(player.rect) and sprite.color == 'green':
+                if player.vol.y < 0  and sprite.collision == True:
                     player.rect.top = sprite.rect.bottom
                     
                 elif player.vol.y > 0:
@@ -96,15 +108,13 @@ class Level:
                     player.vol.y * -1
                 player.vol.y = 0
                 
-
     def arrow_collision(self):
         
         for arrow in self.arrows:
             for sprite in self.tiles.sprites():
-                if sprite.rect.colliderect(arrow.hit_box) and sprite.color == 'orange':
+                if sprite.rect.colliderect(arrow.hit_box) and sprite.collision == True:
                     arrow.stick()
-            pass
-
+            
     def shoot_arrow(self, speedorg, time):
         
         mouse_x,mouse_y = pygame.mouse.get_pos()
