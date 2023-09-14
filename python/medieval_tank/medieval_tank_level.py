@@ -17,7 +17,6 @@ class Level:
         self.mouse_time = self.mouse_delay*60
         self.setup_level(level_data)
         self.find_rim()
-
                 
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
@@ -57,8 +56,13 @@ class Level:
 
     def find_rim(self):
         for sprite in self.tiles.sprites():
-            sprite.pos 
-            None
+            for tile in self.tiles.sprites():
+                if tile.rect.collidepoint(sprite.pos[0]+40,sprite.pos[1]-40) and tile.color != 'blue': 
+                    sprite.switch_texture(2)
+                    None
+                #else:
+                    #sprite.switch_texture(2)
+                    
 
     def scroll_x(self):
         player = self.player.sprite
