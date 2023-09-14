@@ -5,17 +5,17 @@ pygame.display.set_caption('medieval_tank')
 Level_map =[
     
     
-    '                                                                        P                                               ',
     '                                                                                                                        ',
+    '                           P                                                                                            ',
     '                                                                                                                        ',
-    '                         XXXXX              E                                                                           ',
+    '       E                 XXXXX              E                                                                           ',
     '      XX                 B   B            XXXXX                                                                         ',
     '     XX                  X   X            B   B                                          XXXX                           ',
-    '    XX                   B   B            XXGXX                                         B    B                          ',
+    '    XX                   B E B            XXGXX                                         B    B                          ',
     '    XX             X    XXGGGXX    X    XXBBGBBXX       G                               X    X                          ',
-    '   XXX             X    B     B       XXBBBBBBBBBXX     G                  EEE          X    X                          ',
-    '  XXXXX       XX   X    B     B         B   B   B                          EEE          XXBBXX                          ',
-    ' XXXXXXX      BB   X    XXXXXXX   XXXXXXXXXXXXXXXXXX       XXXXXX          EEE          BB  BB                          ',
+    '   XXX             X    B     B    B  XXBBBBBBBBBXX     G                  EEE          XE   X              E            ',
+    '  XXXXX       XX   X    B     B    B    B   B   B            E             EEE          XXBBXX             XX           ',
+    ' XXXXXXX  E   BB   X    XXXXXXX   XXXXXXXXXXXXXXXXXX       XXXXXX  E       EEE          BB  BB       E    XBBX          ',
     'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX']
 
 
