@@ -105,7 +105,7 @@ class Arrow(pygame.sprite.Sprite):
             
             if self.rect.x > screen_width + 500 or self.rect.y > screen_hight + 500:
                 self.kill()
-            elif self.rect.x < -500 or self.rect.y < -500:
+            elif self.rect.x < -500 or self.rect.y < -1000:
                 self.kill()       
 
     def stick(self):

@@ -4,11 +4,11 @@ class Tile(pygame.sprite.Sprite):
     def __init__(self, pos, size, color, display_surface):
         super().__init__()
         if color == 'rock':
-            self.image = pygame.image.load('images/crapygrass_tile_80x80.png')
+            self.image = pygame.image.load('images/rock_tile_80x80.png')
             self.collision = True
                 
         elif color == 'ladder':
-            self.image = pygame.image.load('images/face_tile_80x80.png')
+            self.image = pygame.image.load('images/ladder_tile_80x80.png')
             self.collision = True
         
         else:
@@ -37,7 +37,12 @@ class Tile(pygame.sprite.Sprite):
 
             if texture_index == 2:                
 
-                self.image = pygame.image.load('images/rock_tile_80x80.png')
+                self.image = pygame.image.load('images/crapygrass_tile_80x80.png')
+                self.collision = True
+
+            if  texture_index == 3:                
+
+                self.image = pygame.image.load('images/crapygrasscorner_tile_80x80.png')
                 self.collision = True
 
 

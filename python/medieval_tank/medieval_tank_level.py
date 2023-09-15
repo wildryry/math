@@ -13,7 +13,7 @@ class Level:
         self.display_surface = surface 
         self.world_shift = 0
         self.mouse_down = False
-        self.mouse_delay = 0.5 # <-  in seconds
+        self.mouse_delay = 0.3 # <-  in seconds
         self.mouse_time = self.mouse_delay*60
         self.setup_level(level_data)
         self.find_rim()
@@ -25,6 +25,8 @@ class Level:
         self.player = pygame.sprite.GroupSingle()
         for row_index,row in enumerate(layout):
             for col_index,cell in enumerate(row):
+
+                #this places all the tiles based off of the level_data
 
                 x = tile_size*col_index
                 y = tile_size*row_index
@@ -57,13 +59,14 @@ class Level:
     def find_rim(self):
         for sprite in self.tiles.sprites():
             for tile in self.tiles.sprites():
-                if tile.rect.collidepoint(sprite.pos[0]+40,sprite.pos[1]-40) and tile.color != 'blue': 
+                if tile.rect.collidepoint(sprite.pos[0]+40,sprite.pos[1]-40) != True and tile.color != 'blue': 
                     sprite.switch_texture(2)
                     None
+                if tile.rect.collidepoint(sprite.pos[0]+120,sprite.pos[1]-40) != True and tile.color != 'blue' and tile.rect.collidepoint(sprite.pos[0]+40,sprite.pos[1]-40) != True   : 
+                    sprite.switch_texture(3)
                 #else:
                     #sprite.switch_texture(2)
                     
-
     def scroll_x(self):
         player = self.player.sprite
         player_x = player.rect.centerx
@@ -159,7 +162,7 @@ class Level:
         #mouse input
         click = pygame.mouse.get_pressed()
         if click[0] == True and self.mouse_time >= self.mouse_delay*60:
-            self.shoot_arrow(175, 5)
+            self.shoot_arrow(75, 5)
             self.mouse_down = True
             self.mouse_time = 0
         else:
