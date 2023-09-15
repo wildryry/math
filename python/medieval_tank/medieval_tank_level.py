@@ -159,7 +159,7 @@ class Level:
         #mouse input
         click = pygame.mouse.get_pressed()
         if click[0] == True and self.mouse_time >= self.mouse_delay*60:
-            self.shoot_arrow(75, 5)
+            self.shoot_arrow(175, 5)
             self.mouse_down = True
             self.mouse_time = 0
         else:

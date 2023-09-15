@@ -13,6 +13,7 @@ class Arrow(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center = pos)
         self.hit_box = pygame.Rect(pos , (15,15))
         self.hit_box.center = pos
+        #self.airslow = 25.5
         
         self.gravity = gravity
 
@@ -28,9 +29,12 @@ class Arrow(pygame.sprite.Sprite):
 
     def update(self,delta_time,level,surface):
         self.hit_box.center = self.rect.center
-        
-        
-
+        '''
+        if self.vol.x < 0:
+                    self.vol.x += self.airslow
+        elif self.vol.x > 0: 
+                    self.vol.x -= self.airslow
+        '''
         self.vol = self.vol + self.gravity * delta_time/1000
 
         self.pos += self.vol * delta_time/1000
@@ -68,7 +72,9 @@ class Arrow(pygame.sprite.Sprite):
             elif self.dir.y > 0 and self.dir.x < 0:     
                 self.rotation = ma.degrees(ma.asin(vector.y) ) + 0
                 None
-        
+             
+                
+
             vector2 = vector*15
 
             self.hit_box.x = vector2.x + self.pos.x + 15

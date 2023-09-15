@@ -28,19 +28,23 @@ class Tile(pygame.sprite.Sprite):
         pass
 
     def switch_texture(self, texture_index):
-        if self.color != 'blue'or self.color != 'ladder':
+        if self.color != 'blue'and self.color != 'ladder':
+
             if texture_index == 1:
+
                 self.image = pygame.image.load('images/rock_tile_80x80.png')
                 self.collision = True
-            if texture_index == 2:
-                self.image = pygame.image.load('images/face_tile_80x80.png')
+
+            if texture_index == 2:                
+
+                self.image = pygame.image.load('images/rock_tile_80x80.png')
                 self.collision = True
 
 
         pass
     
     def update(self, x_shift):
-        pygame.draw.line(self.display_surface, 'red', self.pos, (self.pos[0]+40, self.pos[1]-40))
+        #pygame.draw.line(self.display_surface, 'red', self.pos, (self.pos[0]+40, self.pos[1]-40))
        
 
         self.rect.x += x_shift
