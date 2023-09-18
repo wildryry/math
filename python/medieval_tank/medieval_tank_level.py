@@ -59,13 +59,13 @@ class Level:
     def find_rim(self):
         for sprite in self.tiles.sprites():
             for tile in self.tiles.sprites():
-                if tile.rect.collidepoint(sprite.pos[0]+40,sprite.pos[1]-40) != True and tile.color != 'blue': 
-                    sprite.switch_texture(2)
-                    None
-                if tile.rect.collidepoint(sprite.pos[0]+120,sprite.pos[1]-40) != True and tile.color != 'blue' and tile.rect.collidepoint(sprite.pos[0]+40,sprite.pos[1]-40) != True   : 
-                    sprite.switch_texture(3)
-                #else:
+                #if tile.rect.collidepoint(sprite.pos[0]+40,sprite.pos[1]-40) != True and tile.color != 'blue': 
                     #sprite.switch_texture(2)
+                    #None
+                #if tile.rect.collidepoint(sprite.pos[0]+120,sprite.pos[1]+40) != True and tile.color != 'blue' and tile.rect.collidepoint(sprite.pos[0]+40,sprite.pos[1]-40) != True   : 
+                    #print('1')
+                    #sprite.switch_texture(3)
+                None   
                     
     def scroll_x(self):
         player = self.player.sprite
