@@ -35,7 +35,7 @@ class Level:
 
                     tile = Tile((x,y), tile_size, 'rock', self.display_surface)
                     self.tiles.add(tile)
-                
+              
                 if cell == 'P':
 
                     player_sprite = Player(screen_width/2,y)
