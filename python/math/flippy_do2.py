@@ -1,34 +1,33 @@
 #flippy do
+def flippy_do(bit_amount, target_num):
 
-bitlist = range(8)
-bitlist = list(bitlist)
-bitlist.reverse()
+    base = 2
+    bitlist = range(bit_amount)
+    bitlist = list(bitlist)
+    bitlist.reverse()
 
-output_list = []
+    output_list = []
 
-target_num = int(input('target number:'))
 
-if target_num > 255:
-    print('target number is too big')
-    exit()
-else:
-    for bit in bitlist:
-        
-        if target_num == 2**bit:
-            output_list.append(1)
-            target_num -= 2**bit
-            #print(output_list)
-            #exit()
-
-        elif target_num >= 2**bit:
-            output_list.append(1)
-            target_num -= 2**bit
-
-        else:
-            output_list.append(0)
+    if target_num > base**bit_amount - 1:
+        print('target number is too big')
+        exit()
+    else:
+        for bit in bitlist:
             
-        
-    print(output_list)
+            if target_num == base**bit:
+                output_list.append(1)
+                target_num -= base**bit 
+                
+            elif target_num >= base**bit:
+                output_list.append(1)
+                target_num -= base**bit
+
+            else:
+                output_list.append(0)
+                
+            
+        return output_list
 
 
 
