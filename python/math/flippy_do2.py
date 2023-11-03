@@ -15,16 +15,18 @@ else:
     for bit in bitlist:
         
         if target_num == 2**bit:
-            output_list.append(bit)
+            output_list.append(1)
             target_num -= 2**bit
-            print(output_list)
-            exit()
+            #print(output_list)
+            #exit()
 
-        elif target_num > 2**bit:
-            output_list.append(bit)
+        elif target_num >= 2**bit:
+            output_list.append(1)
             target_num -= 2**bit
 
-       
+        else:
+            output_list.append(0)
+            
         
     print(output_list)
 
