@@ -41,6 +41,7 @@ elif input('morse to text (y/n):').lower() == "y":
     data = list(reader)
     morse_bit = ""
 
+    # creates a list of morse code letters
     for letter in input_string:
 
         if letter != " " :morse_bit += letter
@@ -58,11 +59,12 @@ elif input('morse to text (y/n):').lower() == "y":
                 x_index = 0
                 y_index = 2
 
-            print(morse_letter,data[y_index][x_index])
+            
             if data[y_index][x_index] == morse_letter:
                 if morse_letter == "/": output_string += data[y_index+1][x_index] 
 
                 else: output_string += data[y_index+1][x_index]
+                break
 
             
             x_index += 1
