@@ -1,0 +1,5 @@
+import csv
+
+formula = input("type in your formula here:")
+
+print(formula,":--->")
