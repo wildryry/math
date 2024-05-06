@@ -37,7 +37,7 @@ def namingFormulas(formula):
                 element += character
                 if len(formula) > index_1+x:
                     #this loop puts the element into its own string
-                    #note: capital character don't enter the loop
+                    #note: capital characters don't enter the loop
                     if not formula[index_1 + x].isalpha() or formula[index_1 + x] != formula[index_1 + x].upper():
                         while not formula[index_1 + x].isalpha() or formula[index_1 + x] != formula[index_1 + x].upper():
 
@@ -61,6 +61,7 @@ def namingFormulas(formula):
 
         else:
             element = formula
+
         if len(element) > 0:
             elementList.append(element) 
         element = ""   
@@ -117,7 +118,7 @@ def namingFormulas(formula):
                 None
             else:
                 #110
-
+                #this will find the roman numeral  
                 None
         else:
             if input("is there a polyatmoic(y/n) :").lower() == "y":
