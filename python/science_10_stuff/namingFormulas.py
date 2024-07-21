@@ -6,6 +6,7 @@ elementsCsv = "Periodic_Table_of_Elements.csv"
 polyatmoicCsv = "polyatomic_ions.csv"
 
 prefixes = ["Mono","Di","Tri","Tetra","Penta","Hexa","Hepta","Octa","Nona","Deca"]
+
 def isThisANumber(string):
     for number in ["1","2","3","4","5","6","7","8","9"]:
         if string != number and number == "9": 
@@ -17,7 +18,7 @@ def isThisANumber(string):
 def namingFormulas(formula):
     global elementsCsv, polyatmoicCsv
     
-        
+    formula += "_" 
     
     element = ""
     elementList = []
@@ -27,50 +28,35 @@ def namingFormulas(formula):
     #the for loop is to read the formula
     for character in formula:
         
-        if len(formula) > 1:
-            
-                   
-            if character == character.upper() and character.isalpha():
-                
-                x = 1
-                
-                element += character
-                if len(formula) > index_1+x:
-                    #this loop puts the element into its own string
-                    #note: capital characters don't enter the loop
-                    if not formula[index_1 + x].isalpha() or formula[index_1 + x] != formula[index_1 + x].upper():
-                        while not formula[index_1 + x].isalpha() or formula[index_1 + x] != formula[index_1 + x].upper():
+        if character == "_":
+            elementList.append(element)
 
-                            
-                            if formula[index_1+x].isnumeric():
+            #this looks for numbers in the symbol
+            if isThisANumber(character):
 
-                                elementNumberList.append(formula[index_1+x])
-                                
+                for letter in element:
+                    if letter.isnumeric():
+                        elementNumberList.append(letter)
+            else:
+                elementNumberList.append("1")
 
-                            else:
-                                elementNumberList.append("1")                                
-                                element += formula[index_1+x]
-
-                            if index_1+x+1 < len(formula):
-                                x += 1
-                            else: break
-                   
-                    else:
-                    
-                        elementNumberList.append("1")
+            #this emptys the element string to start again
+            element = ""
+        elif character.isnumeric():
+            elementNumberList.append(character)
 
         else:
-            element = formula
-
-        if len(element) > 0:
-            elementList.append(element) 
-        element = ""   
-        index_1 += 1
-
-    while len(elementList) > len(elementNumberList):
-        elementNumberList.append("1")
+           element += character
+            
+        
+        #else:
+        #    element = formula
+        
+    #this gets rid of the last thing in the list
+    del(elementNumberList[-1])
 
     index_1 = 0
+    print(elementList)
     for symbol in elementList:  
         
         #finding the names of the symbols with Csv file
@@ -89,7 +75,7 @@ def namingFormulas(formula):
                     break
         index_1 += 1
 
-    
+    '''
     areTherePosIons = input("are there any pos ions? (y/n) :")
 
     
@@ -130,6 +116,7 @@ def namingFormulas(formula):
                 elementList[1] = elementList[1] +"-ide"
 
                 None
+    '''
     print(elementNumberList)
     name = elementList
     return name
