@@ -13,7 +13,7 @@ class Level:
         self.display_surface = surface 
         self.world_shift = 0
         self.mouse_down = False
-        self.mouse_delay = 0.3 # <-  in seconds
+        self.mouse_delay = -1 # <-  in seconds
         self.mouse_time = self.mouse_delay*60
         self.setup_level(level_data)
         self.find_rim()
