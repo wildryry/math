@@ -1,27 +1,25 @@
 <html>
     <head>
-        <title>time capsule</title>
-        <link rel="stylesheet" href="doodle.css"> 
+        <title>binder book</title>
+        
        
     </head>
     <body>
         <header>
-            <h1>home page</h1>
+            <h1>page 1</h1>
         </header>
         <div class="clipBoard">
             <div class="paper">
             <nav>
                 <ul>
-                    <li><a href="page1">page 1</a></li>
+                    <li><a href="Index.html">home page</a></li>
                     <li>page 2</li>
                     <li>page 3</li>
                 </ul>
             </nav>
             <main>
-                <h2>home</h2>
-                <img src="toturial/half.png" alt="half"
-                    width="120px"
-                >
+                <h2>binder page</h2>
+                <p>this page is about the doodles in my binder</p>
             </main>
             </div>
         </div>
