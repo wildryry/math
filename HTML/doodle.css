@@ -25,7 +25,7 @@ header {
     align-items: center;
     background-color: rgba(80,60,25,100%);
     width:98%;
-    height:950px;
+    height:auto;
     
 }
 .paper{
@@ -34,14 +34,14 @@ header {
     margin-left: auto;
     margin-right: auto;
     width: 95%;
-    height:95%;
+    height:auto;
     
 }
 nav {
-    
+  width: auto;  
 }
 main {
-    
+    width: auto;
 }
 footer {
     margin-top: 3%;
