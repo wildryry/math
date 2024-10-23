@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    background-color: rgb(100,100,100);
+    
+}
+header {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    position:absolute;
+    left:0;
+    right:0;
+    top:30px;
+    margin-bottom:-10px;
+    background-color: darkgray;
+    border: 3px solid black;
+    border-radius: 15px;
+    width: 20%;
+    height: auto;
+}
+.clipBoard {
+    margin-left:1%;
+    margin-top: 90px;
+    border:3px solid;
+    align-items: center;
+    background-color: rgba(80,60,25,100%);
+    width:98%;
+    height:auto;
+    
+}
+.paper{
+    background-color: bisque;
+    margin-top: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    height:auto;
+    
+}
+nav {
+  width: auto;  
+}
+main {
+    width: auto;
+}
+footer {
+    margin-top: 3%;
+    background-color: rgb(75,75,75);
+    border:3px solid black;
+}
