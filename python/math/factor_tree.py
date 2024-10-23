@@ -22,6 +22,7 @@ check_prime2 = False
 
 num2 = 2
 num1 = int(input('number break down:'))
+
 check_prime = find_prime(num1)
 list_of_primes = []
 
