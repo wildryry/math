@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>time capsule</title>
+        <link rel="icon" type="image/x-icon" href="Content/icons/favicon.ico">
         <!--<link rel="stylesheet" href="doodle.css"> -->
         <script>
             function changeFirstParagraph(inputstring){
@@ -13,6 +14,7 @@
         <header>
             
             <h1><i>home page</i></h1>
+            
         </header>
         <div class="clipBoard">
             <div class="paper">
@@ -21,10 +23,10 @@
                 <table width="100%">
                     
                     <tr>
-                        <td>home page</td>
-                        <td><a href="page1.html">page 1</a></td>
-                        <td><a href="page2.html">page 2</a></td>
-                        <td><a href="page3.html">page 3</a></td>
+                        <td><h3>home page</h3></td>
+                        <td><a href="page1.html"><h3>page 1</h3></a></td>
+                        <td><a href="page2.html"><h3>page 2</h3></a></td>
+                        <td><a href="page3.html"><h3>page 3</h3></a></td>
                     </tr>
                     
                 </table>
@@ -60,16 +62,44 @@
                 </script>
 
                 <p>the cats are talking about you<input type="button" value="listen" onclick="alert2()"></p>
-                
-                <select name="select-o-ton">
-                    <option>cheese</option>
-                    <option>bacon</option>
-                    <option>apple</option>
-                </select>
 
                 <script src="doodleScript.js"></script>
                 
+                <select name="numbers" id="numberSelect1">
+                    <option value="pick a number">pick a number</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
 
+                <select name="numbers" id="numberSelect2">
+                    <option value="pick a number">pick a number</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+
+                <script>
+                    function findSelectedValue() {
+                        var selectedElement = document.querySelector("#numberSelect1");
+                        alert(selectedElement.value)
+
+                    }
+                </script>
+                <br><input type="button" value="test" onclick="findSelectedValue()">
+                <br><input type="button" value="super secret button" onclick="window.location.href='page4.html';">
 
 
             </main>
