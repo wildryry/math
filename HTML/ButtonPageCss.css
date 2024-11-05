@@ -1,0 +1,15 @@
+#pageButton:hover {
+    color: red;
+    background-color: orange;
+    border-radius: 15px;
+    padding: 5%;
+}
+#pageButton {
+    border-radius: 15px;
+    color: blueviolet;
+    background-color: lightblue;
+    padding: 5%;
+}
+#buttonTable {
+    background-color: cadetblue;
+}
