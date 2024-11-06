@@ -1,15 +1,43 @@
 #pageButton:hover {
+    margin:auto;
     color: red;
     background-color: orange;
     border-radius: 15px;
     padding: 5%;
 }
+
 #pageButton {
+    margin:auto;
     border-radius: 15px;
     color: blueviolet;
     background-color: lightblue;
     padding: 5%;
 }
-#buttonTable {
-    background-color: cadetblue;
+
+#output {
+    background-color: aqua;
+    font-size:130px;
+    margin: 0;
+}
+#output2 {
+    background-color: black;
+    color:greenyellow;
+    font-size:30px;
+    margin: 0;
+}
+#output3 {
+    background-color: orange;
+    color: yellow;
+    font-size:150px;
+    margin-top: 0;
+}
+#highscoreLabel {
+    background-color: orange;
+    color: yellow;
+    font-size:150px;
+    margin: 0;
+}
+body {
+    background-image: url("oldDoodleWebsite/toturial/fnaf-jumpscare.jpg");
+    background-size: 15%;
 }
