@@ -1,0 +1,43 @@
+body {
+    background-image: url(half.png);
+    background-size: 33.333333%;
+    background-color: rgba(35,60,20,90%);
+    color: rgb(50, 1, 1);
+    background-repeat: repeat-y;
+    background-position-x:center;
+    font-family:'wingding';
+    
+}
+@font-face {
+    font-family:'wingding';
+    src:url("../Content/fonts/wingding.ttf") format("truetype");
+}
+
+.mainDiv {
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 50px;
+    background-color: rgba(45,100,45,90%);
+    border: 5px solid rgba(45,100,45,95%);
+    
+}
+nav {
+    margin-right: 25%;
+    color:white;
+    background-color: purple;
+    border:5px dashed orange;
+    border-radius: 15px;
+}
+main {
+    margin-left: 40%;
+    background-color: aqua;
+    border:5px solid blue
+}
+
+.inMainDiv {
+    background-color: darkcyan;
+}
+footer {
+    background-color: white;
+    border:5px solid black
+}

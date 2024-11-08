@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: rgb(100,100,100);
+    background-color: rgb(60,80,0);
     
 }
 header {
@@ -35,6 +35,9 @@ header {
     margin-right: auto;
     width: 95%;
     height:auto;
+    background-image: url("Content/Images/springCat.gif");
+    background-blend-mode:color-dodge;
+    background-size: 25%;
     
 }
 nav {
@@ -47,4 +50,11 @@ footer {
     margin-top: 3%;
     background-color: rgb(75,75,75);
     border:3px solid black;
+}
+article {
+    margin: 50px;
+    
+    background-color: rgba(60, 80, 100, 0.5);
+    border: 5px solid black;
+    border-radius: 10px;
 }

@@ -18,7 +18,7 @@ function helloWorld() {
     }
     
     for (i=0; i < 1; i++) {
-        para.innerHTML = Math.floor(Math.random() * 9) + parseInt(para.innerHTML)
+        para.innerHTML = Math.round(Math.random() * 10) + parseInt(para.innerHTML)
         para2.innerHTML += "/"
     }
     
@@ -28,6 +28,7 @@ function helloWorld() {
 }
 function reset() {
     const para = document.getElementById("output")
+    const para2 = document.getElementById("output2")
     para.innerHTML ="1"
-    para2.innerHTML ="0"
+    para2.innerHTML =""
 }
