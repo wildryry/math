@@ -3,23 +3,36 @@ body {
     background-color: rgba(85, 27, 5, 0.767);
     background-image: url('half-life-3-logo-png-transparent.png');
     background-size: 10%;
-    background-blend-mode: hue;
+    background-blend-mode:hue;
+    
   }
   .center-text{
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+    
     width: 500px;
     border: 15px double rgba(211, 172, 99, 0.527);
     border-radius: 30px;
     background-color: rgba(165, 134, 78, 0.527);
     background-position-x:center;
     color:rgb(195, 217, 228);
+    text-shadow: 10px;
+    padding: 30px 0px 0px 100px;
   }
   .white{
     color:rgb(195, 217, 228);
   }
+
+  h1 {
+    text-align: center;
+  }
+  li {
+    line-height: 2;
+    letter-spacing: 1px;
+    mix-blend-mode:hard-light;
+  }
   
   .white-large{
+    border: 10px solid green;
     color:rgb(195, 217, 228);
     font-size: 32px; margin: 21px 0; display: block;
   }
@@ -27,9 +40,10 @@ body {
     margin-left: -2%;
     margin-right: -2%;
     margin-bottom: -2%; 
-    
     margin-top: 40px;
     
+    padding-bottom: 8%;
+    padding-left: 5%;
     font-size: small;
     border-top: 15px dashed rgba(211, 172, 99, 0.527);
     background-color: rgba(165, 134, 30, 0.527);

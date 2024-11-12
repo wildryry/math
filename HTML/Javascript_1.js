@@ -18,7 +18,7 @@ function helloWorld() {
     }
     
     for (i=0; i < 1; i++) {
-        para.innerHTML = Math.round(Math.random() * 10) + parseInt(para.innerHTML)
+        para.innerHTML = (Math.random() * 10) + parseInt(para.innerHTML)
         para2.innerHTML += "/"
     }
     

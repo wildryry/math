@@ -5,7 +5,8 @@ body {
     color: rgb(50, 1, 1);
     background-repeat: repeat-y;
     background-position-x:center;
-    font-family:'wingding';
+    font-family:'wingding', Times, serif;
+    text-align: center;
     
 }
 @font-face {
