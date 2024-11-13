@@ -4,6 +4,7 @@ body {
     background-image: url('half-life-3-logo-png-transparent.png');
     background-size: 10%;
     background-blend-mode:hue;
+    text-shadow: 2px 1px 1px black;
     
   }
   .center-text{
@@ -29,7 +30,20 @@ body {
     line-height: 2;
     letter-spacing: 1px;
     mix-blend-mode:hard-light;
+    list-style-type:georgian;
   }
+  img {
+    display:block;
+    margin: 0 autog;
+  }
+  a:hover {
+    font-size: 50;
+    color: green;
+  }
+  .special {
+    color: blue;
+  }
+  
   
   .white-large{
     border: 10px solid green;
