@@ -18,6 +18,10 @@ header {
     width: 20%;
     height: auto;
 }
+img {
+    border: outset goldenrod 5px;
+    
+}
 .clipBoard {
     margin-left:1%;
     margin-top: 90px;
