@@ -1,8 +1,8 @@
 
 body {
-    background-color: rgba(85, 27, 5, 0.767);
-    background-image: url('half-life-3-logo-png-transparent.png');
-    background-size: 10%;
+    background: rgba(85, 27, 5, 0.767) url("half-life-3-logo-png-transparent.png") center repeat-y;
+    background-size: 40%;
+    background-repeat: space repeat-y;
     background-blend-mode:hue;
     text-shadow: 2px 1px 1px black;
     
@@ -72,10 +72,11 @@ body {
     transform: rotate(0.3turn);
   }
   .square2 {
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     margin: 30px;
     background-color: greenyellow;
+    border: 3px solid mediumslateblue;
     transform: rotate(0.3turn);
   }
   .white-large{
