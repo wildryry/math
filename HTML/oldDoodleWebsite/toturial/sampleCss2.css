@@ -20,7 +20,13 @@ body {
     margin-top: 50px;
     background-color: rgba(45,100,45,90%);
     border: 5px solid rgba(45,100,45,95%);
-    
+}
+
+p + img { /*effects the image right after a paragraph*/ 
+    color:red;
+}
+p ~ img { /*effects imgs after a paragraph*/
+    color:blue;
 }
 nav {
     margin-right: 25%;
