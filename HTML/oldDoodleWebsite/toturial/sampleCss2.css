@@ -48,3 +48,13 @@ footer {
     background-color: white;
     border:5px solid black
 }
+.expand {
+    align-self: start;
+    
+    background-color: blue;
+    
+}
+.expand:hover {
+    width: 10%;
+    background-color: blue;
+}

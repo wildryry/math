@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: rgb(60,80,0);
+    width: 1000px;
     
 }
 header {
@@ -23,11 +24,12 @@ img {
     
 }
 .clipBoard {
-    margin-left:1%;
+    left:150;
+    margin-left:calc(150px + 10px);
     margin-top: 90px;
     border:3px solid;
     align-items: center;
-    background-color: rgba(80,60,25,100%);
+    background-color: rgba(100,80,45,100%);
     width:98%;
     height:auto;
     
@@ -39,13 +41,20 @@ img {
     margin-right: auto;
     width: 95%;
     height:auto;
+    /*
     background-image: url("Content/Images/springCat.gif");
     background-blend-mode:color-dodge;
     background-size: 25%;
-    
+    */
 }
 nav {
-  width: auto;  
+    border: 5px dashed gray;
+    width: 150px;  
+    position:absolute;
+    background-color: white;
+    height: 1000;
+    top:0;
+    left:0;
 }
 main {
     width: auto;
