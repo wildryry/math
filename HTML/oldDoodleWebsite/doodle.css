@@ -1,5 +1,5 @@
 body {
-    margin: 0;
+    left:150px;
     background-color: rgb(60,80,0);
     width: 1000px;
     
@@ -24,8 +24,8 @@ img {
     
 }
 .clipBoard {
-    left:150;
-    margin-left:calc(150px + 10px);
+    position: absolute;
+    left:calc(150px + 10px);
     margin-top: 90px;
     border:3px solid;
     align-items: center;
@@ -50,19 +50,22 @@ img {
 nav {
     border: 5px dashed gray;
     width: 150px;  
-    position:absolute;
+    position:fixed;
     background-color: white;
-    height: 1000;
     top:0;
     left:0;
+    bottom: 0;
 }
 main {
     width: auto;
 }
 footer {
+    position: absolute;
+    bottom:0;
     margin-top: 3%;
     background-color: rgb(75,75,75);
     border:3px solid black;
+    height:150px;
 }
 article {
     margin: 50px;
