@@ -1,5 +1,8 @@
+
+
 * {
     cursor:url(Content/Images/coolAssCursor.png), auto;
+    --backgroundColor1: #6ddea3;
 }
 body {
     left:150px;
@@ -23,7 +26,7 @@ header {
     right:0;
     top:-30px;
     margin-bottom:-10px;
-    background-color: darkgray;
+    background-color: var(--backgroundColor1);
     border: 3px solid black;
     border-radius: 15px;
     width: 200px;
@@ -35,10 +38,10 @@ img {
 }
 
 nav {
-    border: 5px dashed gray;
+    border: 5px dashed #439c6e;
     width: 150px;  
     position:fixed;
-    background-color: white;
+    background-color: var(--backgroundColor1);
     top:0;
     left:0;
     bottom: 0;
@@ -51,24 +54,33 @@ footer {
     margin-top: 3%;
     background-color: rgb(75,75,75);
     border-top:3px dashed black;
+    border-radius: 25px;
     height:150px;
 }
 article {
     margin: 50px;
     
-    background-color: rgba(60, 80, 100, 0.5);
-    border: 5px solid black;
+    background-color: var(--backgroundColor1);
+    border: 5px solid #439c6e;
     border-radius: 10px;
 }
 
 h1 {
     text-shadow: #222 8px 2px 4px;
 }
+a {
+    color: black;
+    display: inline-block;
+}
+td {
+    border: 3px black double;
+}
 .clipBoard {
     position: absolute;
     left:calc(150px + 50px);
     margin-top: 90px;
-    border:5px solid;
+    border: 4px solid #439c6e;
+    border-radius: 25px;
     align-items: center;
     background-color: rgba(100,80,45,100%);
     width:900px;
