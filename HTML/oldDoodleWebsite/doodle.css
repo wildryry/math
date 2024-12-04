@@ -3,6 +3,7 @@
 * {
     cursor:url(Content/Images/coolAssCursor.png), auto;
     --backgroundColor1: #6ddea3;
+    --borderColor1: #439c6e;
 }
 body {
     left:150px;
@@ -50,7 +51,7 @@ main {
     width: auto;
 }
 footer {
-    
+    padding-top: 10px;
     margin-top: 3%;
     background-color: rgb(75,75,75);
     border-top:3px dashed black;
@@ -75,6 +76,20 @@ a {
 td {
     border: 3px black double;
 }
+.fakeLink {
+    display: inline-block;
+}
+h2 {
+    color:blue;
+    background-color: var(--backgroundColor1);
+    border: 6px solid var(--borderColor1);
+    text-align: center;
+    width:200px;
+    display:block;
+}
+article + h2 {
+    background-color: rebeccapurple;
+}
 .clipBoard {
     position: absolute;
     left:calc(150px + 50px);
@@ -94,6 +109,7 @@ td {
     margin-right: auto;
     width: 95%;
     height:auto;
+    padding-bottom: 25px;
     /*
     background-image: url("Content/Images/springCat.gif");
     background-blend-mode:color-dodge;
