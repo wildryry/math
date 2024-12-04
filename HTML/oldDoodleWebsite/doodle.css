@@ -43,6 +43,8 @@ nav {
     width: 150px;  
     position:fixed;
     background-color: var(--backgroundColor1);
+    padding: 10px;
+    align-content:normal;
     top:0;
     left:0;
     bottom: 0;
@@ -70,14 +72,29 @@ h1 {
     text-shadow: #222 8px 2px 4px;
 }
 a {
-    color: black;
+    color: darkcyan;
     display: inline-block;
+    text-decoration: none;
+    font-size: 30px;
 }
 td {
     border: 3px black double;
+    text-align:center;
+    padding-top: 20%;
+    display:block;
+    width: 100px;
+    height: 100px;
+    transition: width 0.5s;
+}
+td:hover {
+    
+    width :135px;
+    
 }
 .fakeLink {
+    color: var(--borderColor1);
     display: inline-block;
+    font-size: 30px;
 }
 h2 {
     color:blue;
@@ -92,7 +109,7 @@ article + h2 {
 }
 .clipBoard {
     position: absolute;
-    left:calc(150px + 50px);
+    left:500px;
     margin-top: 90px;
     border: 4px solid #439c6e;
     border-radius: 25px;
