@@ -3,6 +3,7 @@
 * {
     cursor:url(Content/Images/coolAssCursor.png), auto;
     --backgroundColor1: #6ddea3;
+    --backgroundColor2 :#aef5d0;
     --borderColor1: #439c6e;
 }
 body {
@@ -35,7 +36,24 @@ header {
 }
 img {
     border: outset goldenrod 5px;
-    
+    margin-left: auto;
+    margin-right: auto;
+    display:block;
+    height: 400px;
+    transition: height 0.2s;
+}
+img[src="Content/Images/storyWithSkulls.jpg"] {
+    width:700px;
+    transition: width 0.2s;
+}
+img:hover {
+    height: 420px;
+}
+img:hover[src="Content/Images/storyWithSkulls.jpg"]{
+    width:740px
+}
+img.campfire {
+    height:130px;
 }
 
 nav {
@@ -53,11 +71,13 @@ main {
     width: auto;
 }
 footer {
-    padding-top: 10px;
+    padding-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
     margin-top: 3%;
     background-color: rgb(75,75,75);
-    border-top:3px dashed black;
-    border-radius: 25px;
+    border:3px solid black;
+    border-radius: 15px;
     height:150px;
 }
 article {
@@ -72,19 +92,29 @@ h1 {
     text-shadow: #222 8px 2px 4px;
 }
 a {
+    color:darkcyan;
+    text-decoration: none;
+    background-color: lightyellow;
+}
+td
+a {
     color: darkcyan;
     display: inline-block;
     text-decoration: none;
     font-size: 30px;
+    background-color: var(--backgroundColor1);
 }
 td {
     border: 3px black double;
+    margin-left: auto;
+    margin-right: auto;
     text-align:center;
-    padding-top: 20%;
+    padding-top: 10px;
     display:block;
     width: 100px;
-    height: 100px;
-    transition: width 0.5s;
+    height: 150px;
+    font-size: 30px;
+    transition: width 0.2s;
 }
 td:hover {
     
@@ -95,11 +125,18 @@ td:hover {
     color: var(--borderColor1);
     display: inline-block;
     font-size: 30px;
+    text-decoration: solid;
 }
+details {
+    color:darkcyan;
+}
+
 h2 {
     color:blue;
     background-color: var(--backgroundColor1);
     border: 6px solid var(--borderColor1);
+    margin-left: 15px;
+    margin-top: 15px;
     text-align: center;
     width:200px;
     display:block;
@@ -138,4 +175,14 @@ article + h2 {
     width:100%px;
     height:200px;
     
-  }
+}
+p {
+    color:black;
+    display: inline-block;
+    background-color: #aef5d0;
+}
+dl {
+    color:black;
+    display: inline-block;
+    background-color: #aef5d0;
+}
