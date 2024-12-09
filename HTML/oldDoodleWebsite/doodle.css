@@ -5,6 +5,7 @@
     --backgroundColor1: #6ddea3;
     --backgroundColor2 :#aef5d0;
     --borderColor1: #439c6e;
+    --borderColor2:#e012d3;
     
 }
 body {
@@ -13,6 +14,10 @@ body {
     
     
     
+}
+@font-face {
+    font-family:'wingding';
+    src:url("Content/fonts/wingding.ttf") format("truetype");
 }
 .background{
     margin-top: -10px;
@@ -41,14 +46,15 @@ img {
     margin-right: auto;
     display:block;
     height: 400px;
-    transition: height 1.1s,transform 0.5s;
+    box-shadow: gold 0px 0px 25px;
+    transition: height 1.1s,transform 0.5s, box-shadow 1.1s;
 }
 img[src="Content/Images/storyWithSkulls.jpg"] {
     width:700px;
     transition: width 0.2s;
 }
 img:hover {
-    
+    box-shadow: white 25px 25px 10px;
     height: 450px;
 }
 img:hover[src="Content/Images/storyWithSkulls.jpg"]{
@@ -94,7 +100,7 @@ article {
 }
 
 h1 {
-    text-shadow: #222 8px 2px 4px;
+    text-shadow: green 0px 2px 10px;
 }
 a {
     color:darkcyan;
@@ -119,9 +125,11 @@ td {
     width: 100px;
     height: 150px;
     font-size: 30px;
-    transition: width 0.80s, transform 0.75s;
+    box-shadow: greenyellow 0px 0px 10px;
+    transition: width 0.80s, transform 0.75s, box-shadow 0.2s;
 }
 td:hover {
+    box-shadow: var(--borderColor2) 0px 0px 20px;
     transform: rotate(360deg);
     width :135px;
     
@@ -148,6 +156,10 @@ h2 {
 }
 article + h2 {
     background-color: rebeccapurple;
+}
+article > h3 {
+    color:darkblue;
+    text-shadow: lightblue 5px 5px 3px;
 }
 .clipBoard {
     position: absolute;
@@ -196,4 +208,7 @@ dl {
 #videoContainer {
     text-align: center;
     margin-bottom: 10px;
+}
+#article12 {
+    font-family:'wingding',Times,serif;
 }
