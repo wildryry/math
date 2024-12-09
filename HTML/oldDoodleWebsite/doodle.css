@@ -11,8 +11,8 @@
 body {
     left:150px;
     background-color: rgb(60,80,0);
-    
-    
+    background-image: url("Content/Images/background1.png   ");
+    background-size: 10%;  
     
 }
 @font-face {
