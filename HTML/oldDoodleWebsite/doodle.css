@@ -7,14 +7,17 @@
     --backgroundColor1: #6ddea3;
     --backgroundColor2 :#aef5d0;
     --borderColor1: #439c6e;
+    --borderColor3:#466e59;
     --borderColor2:#e012d3;
+
     
 }
 
 body {
     
     background-color: rgb(60,80,0);
-    background-image: url("Content/Images/background1.png   ");
+    background-image: url("Content/Images/background5.png   ");
+    background-attachment: fixed;
     background-size: 10%;
       
     
@@ -160,7 +163,8 @@ td > a {
     
 }
 td {
-    border: 3px rgb(146, 71, 71) double;
+    border: 6px var(--borderColor3) double;
+    border-radius: 15px;
     background-color: var(--backgroundColor2);
     margin-left: auto;
     margin-right: auto;
@@ -172,11 +176,12 @@ td {
     font-size: 30px;
     box-shadow: greenyellow 0px 0px 10px;
     overflow: hidden;
-    transition: width 0.15s 0.05s, transform 0s, box-shadow 0.2s;
+    transition: width 0.15s 0.05s, transform 0s, box-shadow 0.2s, border-radius 0.2;
 }
 td:hover {
     box-shadow: cyan 0px 0px 20px;
     transform: rotate(360deg);
+    border-radius: 25px;
     width :200px;
     
 }
