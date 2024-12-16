@@ -55,7 +55,7 @@ img {
     box-shadow: gold 0px 0px 25px;
     
     mix-blend-mode:normal;
-    transition: height 5.1s,transform 0.5s, box-shadow 1.1s;
+    transition: height 1.1s,transform 0.5s, box-shadow 1.1s;
 }
 img[src="Content/Images/storyWithSkulls.jpg"] {
     height: 280px
@@ -65,13 +65,14 @@ img[src="Content/Images/billCrop.jpg"] {
 }
 img.campfire {
     height:130px;
+    background-color: var(--backgroundColor1);
 }
 img:active {
     transform: rotate(360deg);
 }
 img:hover {
     box-shadow: white 25px 25px 10px;
-    height: 11450px;
+    height: 450px;
 }
 img:hover[src="Content/Images/storyWithSkulls.jpg"]{
     height:300px
@@ -103,6 +104,9 @@ nav {
     right:3%;
     border:6px solid var(--borderColor2);
     background-color: black;
+    animation-name: adbarAni;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
 }
 .adBox {
     margin-top: 10px;
@@ -110,6 +114,9 @@ nav {
     margin-right: auto;
     border-bottom: 5px solid red;
     width:80%;
+    animation-name: adAnimation;
+    animation-duration: .73s;
+    animation-iteration-count: infinite;
 }
 .adBox > p {
     margin:  0 0 0 0;
@@ -118,6 +125,16 @@ nav {
     border-radius: 0;
     background-color: orange;
     font-size: 40px;
+}
+@keyframes adAnimation {
+    from {width: 70%;}
+    50% {width:80%;}
+    to {width:70%;}
+}
+@keyframes adbarAni {
+    from {border-color: var(--borderColor2);}
+    50% {border-color: aqua;}
+    to {border-color: var(--borderColor2);}
 }
 main {
     width: auto;
@@ -229,6 +246,9 @@ article > h3 {
 }
 .paper{
     background-color: bisque;
+    background-image: url("Content/Images/backgroundPaper.png");
+    background-repeat: repeat;
+    background-size: 60px;
     margin-top: 1%;
     margin-left: auto;
     margin-right: auto;
