@@ -129,6 +129,9 @@ td > a {
     background-color: var(--backgroundColor1);
     
 }
+tr {
+    height:100%;
+}
 td {
     border: 6px var(--borderColor3) double;
     border-radius: 15px;
